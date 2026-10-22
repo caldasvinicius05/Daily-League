@@ -1,0 +1,60 @@
+# Roda em todo PR e em todo push na main.
+# Qualquer etapa que falhar bloqueia o PR (quando a proteção de branch estiver ativa).
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Tipos, replay, balanceamento e build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      # Nomes e ícones dos campeões (não versionados). Fica em cache por patch.
+      - name: Cache do Data Dragon
+        uses: actions/cache@v4
+        with:
+          path: |
+            shared/generated
+            client/public/champions
+          key: ddragon-${{ hashFiles('shared/champions.ts') }}
+
+      - name: Baixar dados do Data Dragon
+        run: npm run data
+
+      - name: Checagem de tipos
+        run: npm run typecheck
+
+      - name: Teste de replay (servidor reproduz o cliente)
+        run: npm test
+
+      - name: Balanceamento (20 dias fixos)
+        run: npm run balance:check
+
+      - name: Build do frontend
+        run: npx vite build
+
+      - name: Guardar o build
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+          retention-days: 7
