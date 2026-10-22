@@ -1,0 +1,3466 @@
+{
+ "generatedAt": "2026-10-22T17:45:20.697Z",
+ "patches": [
+  "16.21",
+  "16.20"
+ ],
+ "matches": 12006,
+ "minGames": 20,
+ "lanes": {
+  "top": {
+   "Aatrox|Darius": {
+    "games": 23,
+    "winA": 0.434,
+    "gold14A": -357
+   },
+   "Aatrox|Gangplank": {
+    "games": 31,
+    "winA": 0.5082,
+    "gold14A": 90
+   },
+   "Aatrox|Garen": {
+    "games": 21,
+    "winA": 0.4706,
+    "gold14A": 672
+   },
+   "Aatrox|Jax": {
+    "games": 31,
+    "winA": 0.4426,
+    "gold14A": 492
+   },
+   "Aatrox|Malphite": {
+    "games": 27,
+    "winA": 0.4912,
+    "gold14A": 336
+   },
+   "Aatrox|Mordekaiser": {
+    "games": 25,
+    "winA": 0.5636,
+    "gold14A": 558
+   },
+   "Aatrox|Renekton": {
+    "games": 21,
+    "winA": 0.5098,
+    "gold14A": 53
+   },
+   "Aatrox|Sett": {
+    "games": 31,
+    "winA": 0.5246,
+    "gold14A": 240
+   },
+   "Aatrox|Yone": {
+    "games": 28,
+    "winA": 0.5,
+    "gold14A": -388
+   },
+   "Akali|Yone": {
+    "games": 20,
+    "winA": 0.46,
+    "gold14A": 1078
+   },
+   "Camille|Gangplank": {
+    "games": 22,
+    "winA": 0.4615,
+    "gold14A": -594
+   },
+   "Camille|Garen": {
+    "games": 20,
+    "winA": 0.48,
+    "gold14A": 230
+   },
+   "Camille|Jax": {
+    "games": 22,
+    "winA": 0.5,
+    "gold14A": -807
+   },
+   "Camille|Mordekaiser": {
+    "games": 22,
+    "winA": 0.5385,
+    "gold14A": -807
+   },
+   "Camille|Volibear": {
+    "games": 21,
+    "winA": 0.4902,
+    "gold14A": -931
+   },
+   "Camille|Yone": {
+    "games": 28,
+    "winA": 0.4828,
+    "gold14A": -356
+   },
+   "Chogath|Malphite": {
+    "games": 21,
+    "winA": 0.4314,
+    "gold14A": 7
+   },
+   "Darius|Gangplank": {
+    "games": 25,
+    "winA": 0.4909,
+    "gold14A": -261
+   },
+   "Darius|Garen": {
+    "games": 20,
+    "winA": 0.52,
+    "gold14A": 491
+   },
+   "Darius|Jax": {
+    "games": 22,
+    "winA": 0.5192,
+    "gold14A": -99
+   },
+   "Darius|Jayce": {
+    "games": 21,
+    "winA": 0.4706,
+    "gold14A": -96
+   },
+   "Darius|Mordekaiser": {
+    "games": 25,
+    "winA": 0.5636,
+    "gold14A": -88
+   },
+   "Darius|Renekton": {
+    "games": 25,
+    "winA": 0.5091,
+    "gold14A": 611
+   },
+   "Darius|Sett": {
+    "games": 31,
+    "winA": 0.5082,
+    "gold14A": -368
+   },
+   "Darius|Teemo": {
+    "games": 24,
+    "winA": 0.5185,
+    "gold14A": -294
+   },
+   "Darius|Volibear": {
+    "games": 20,
+    "winA": 0.5,
+    "gold14A": -338
+   },
+   "Darius|Yone": {
+    "games": 27,
+    "winA": 0.4561,
+    "gold14A": 619
+   },
+   "Fiora|Sett": {
+    "games": 26,
+    "winA": 0.4821,
+    "gold14A": -726
+   },
+   "Gangplank|Garen": {
+    "games": 26,
+    "winA": 0.5714,
+    "gold14A": 522
+   },
+   "Gangplank|Gnar": {
+    "games": 24,
+    "winA": 0.537,
+    "gold14A": -211
+   },
+   "Gangplank|Irelia": {
+    "games": 25,
+    "winA": 0.4909,
+    "gold14A": -705
+   },
+   "Gangplank|Jax": {
+    "games": 20,
+    "winA": 0.46,
+    "gold14A": 627
+   },
+   "Gangplank|Jayce": {
+    "games": 26,
+    "winA": 0.5,
+    "gold14A": 22
+   },
+   "Gangplank|Malphite": {
+    "games": 28,
+    "winA": 0.431,
+    "gold14A": 422
+   },
+   "Gangplank|Mordekaiser": {
+    "games": 20,
+    "winA": 0.52,
+    "gold14A": 313
+   },
+   "Gangplank|Riven": {
+    "games": 20,
+    "winA": 0.54,
+    "gold14A": 183
+   },
+   "Gangplank|Sett": {
+    "games": 29,
+    "winA": 0.4746,
+    "gold14A": -356
+   },
+   "Gangplank|Teemo": {
+    "games": 26,
+    "winA": 0.5179,
+    "gold14A": 196
+   },
+   "Gangplank|Volibear": {
+    "games": 20,
+    "winA": 0.54,
+    "gold14A": 657
+   },
+   "Gangplank|Yasuo": {
+    "games": 26,
+    "winA": 0.4286,
+    "gold14A": 621
+   },
+   "Gangplank|Yone": {
+    "games": 33,
+    "winA": 0.5079,
+    "gold14A": 769
+   },
+   "Garen|Jax": {
+    "games": 42,
+    "winA": 0.5139,
+    "gold14A": 717
+   },
+   "Garen|Mordekaiser": {
+    "games": 23,
+    "winA": 0.4717,
+    "gold14A": -639
+   },
+   "Garen|Nasus": {
+    "games": 23,
+    "winA": 0.566,
+    "gold14A": 945
+   },
+   "Garen|Sett": {
+    "games": 21,
+    "winA": 0.5294,
+    "gold14A": -481
+   },
+   "Garen|Yone": {
+    "games": 29,
+    "winA": 0.4068,
+    "gold14A": 656
+   },
+   "Gnar|Malphite": {
+    "games": 38,
+    "winA": 0.4853,
+    "gold14A": -143
+   },
+   "Gragas|Jax": {
+    "games": 20,
+    "winA": 0.48,
+    "gold14A": 404
+   },
+   "Irelia|Jayce": {
+    "games": 26,
+    "winA": 0.5,
+    "gold14A": 1107
+   },
+   "Irelia|Malphite": {
+    "games": 22,
+    "winA": 0.4615,
+    "gold14A": 780
+   },
+   "Irelia|Yasuo": {
+    "games": 20,
+    "winA": 0.48,
+    "gold14A": 783
+   },
+   "Irelia|Yone": {
+    "games": 22,
+    "winA": 0.5192,
+    "gold14A": 1579
+   },
+   "Jax|Jayce": {
+    "games": 28,
+    "winA": 0.5172,
+    "gold14A": -370
+   },
+   "Jax|Malphite": {
+    "games": 30,
+    "winA": 0.5167,
+    "gold14A": 268
+   },
+   "Jax|Mordekaiser": {
+    "games": 30,
+    "winA": 0.4333,
+    "gold14A": -574
+   },
+   "Jax|Nasus": {
+    "games": 23,
+    "winA": 0.4717,
+    "gold14A": 535
+   },
+   "Jax|Renekton": {
+    "games": 32,
+    "winA": 0.4516,
+    "gold14A": -556
+   },
+   "Jax|Sett": {
+    "games": 30,
+    "winA": 0.4833,
+    "gold14A": 336
+   },
+   "Jax|Volibear": {
+    "games": 32,
+    "winA": 0.5806,
+    "gold14A": 412
+   },
+   "Jax|Yasuo": {
+    "games": 25,
+    "winA": 0.6,
+    "gold14A": 612
+   },
+   "Jax|Yone": {
+    "games": 47,
+    "winA": 0.5195,
+    "gold14A": 539
+   },
+   "Jayce|Malphite": {
+    "games": 34,
+    "winA": 0.4375,
+    "gold14A": 2
+   },
+   "Jayce|Mordekaiser": {
+    "games": 20,
+    "winA": 0.56,
+    "gold14A": 960
+   },
+   "Jayce|Yone": {
+    "games": 24,
+    "winA": 0.4815,
+    "gold14A": 338
+   },
+   "Malphite|Mordekaiser": {
+    "games": 36,
+    "winA": 0.4242,
+    "gold14A": -561
+   },
+   "Malphite|Sett": {
+    "games": 33,
+    "winA": 0.4762,
+    "gold14A": -70
+   },
+   "Malphite|Sylas": {
+    "games": 34,
+    "winA": 0.4375,
+    "gold14A": -612
+   },
+   "Malphite|Teemo": {
+    "games": 32,
+    "winA": 0.5968,
+    "gold14A": 423
+   },
+   "Malphite|Yasuo": {
+    "games": 34,
+    "winA": 0.5156,
+    "gold14A": -149
+   },
+   "Malphite|Yone": {
+    "games": 33,
+    "winA": 0.5079,
+    "gold14A": -165
+   },
+   "Mordekaiser|Sett": {
+    "games": 24,
+    "winA": 0.5741,
+    "gold14A": -19
+   },
+   "Mordekaiser|Volibear": {
+    "games": 38,
+    "winA": 0.5882,
+    "gold14A": 156
+   },
+   "Mordekaiser|Yasuo": {
+    "games": 21,
+    "winA": 0.5686,
+    "gold14A": -515
+   },
+   "Mordekaiser|Yone": {
+    "games": 31,
+    "winA": 0.4426,
+    "gold14A": -300
+   },
+   "Renekton|Riven": {
+    "games": 27,
+    "winA": 0.5439,
+    "gold14A": 905
+   },
+   "Renekton|Sett": {
+    "games": 34,
+    "winA": 0.5,
+    "gold14A": 277
+   },
+   "Renekton|Volibear": {
+    "games": 25,
+    "winA": 0.5455,
+    "gold14A": 440
+   },
+   "Renekton|Yasuo": {
+    "games": 26,
+    "winA": 0.5,
+    "gold14A": 203
+   },
+   "Renekton|Yone": {
+    "games": 33,
+    "winA": 0.5238,
+    "gold14A": 370
+   },
+   "Riven|Yone": {
+    "games": 20,
+    "winA": 0.5,
+    "gold14A": 387
+   },
+   "Sett|Volibear": {
+    "games": 33,
+    "winA": 0.4921,
+    "gold14A": -324
+   },
+   "Sett|Yone": {
+    "games": 27,
+    "winA": 0.4737,
+    "gold14A": 473
+   },
+   "Volibear|Yasuo": {
+    "games": 22,
+    "winA": 0.5192,
+    "gold14A": 576
+   },
+   "Volibear|Yone": {
+    "games": 28,
+    "winA": 0.569,
+    "gold14A": 1289
+   },
+   "Yasuo|Yone": {
+    "games": 30,
+    "winA": 0.45,
+    "gold14A": -471
+   },
+   "Yone|Yorick": {
+    "games": 22,
+    "winA": 0.5577,
+    "gold14A": 559
+   }
+  },
+  "jungle": {
+   "Briar|Ekko": {
+    "games": 23,
+    "winA": 0.6038,
+    "gold14A": 346
+   },
+   "Briar|Hecarim": {
+    "games": 23,
+    "winA": 0.434,
+    "gold14A": -468
+   },
+   "Briar|Kayn": {
+    "games": 33,
+    "winA": 0.4762,
+    "gold14A": 221
+   },
+   "Briar|LeeSin": {
+    "games": 34,
+    "winA": 0.6094,
+    "gold14A": 777
+   },
+   "Briar|Viego": {
+    "games": 23,
+    "winA": 0.5472,
+    "gold14A": 475
+   },
+   "Chogath|Ekko": {
+    "games": 33,
+    "winA": 0.5714,
+    "gold14A": -327
+   },
+   "Chogath|Graves": {
+    "games": 24,
+    "winA": 0.6111,
+    "gold14A": 21
+   },
+   "Chogath|Hecarim": {
+    "games": 36,
+    "winA": 0.6061,
+    "gold14A": -558
+   },
+   "Chogath|JarvanIV": {
+    "games": 20,
+    "winA": 0.52,
+    "gold14A": 261
+   },
+   "Chogath|Kayn": {
+    "games": 54,
+    "winA": 0.4643,
+    "gold14A": -222
+   },
+   "Chogath|Khazix": {
+    "games": 24,
+    "winA": 0.5185,
+    "gold14A": -769
+   },
+   "Chogath|LeeSin": {
+    "games": 45,
+    "winA": 0.52,
+    "gold14A": -158
+   },
+   "Chogath|MasterYi": {
+    "games": 21,
+    "winA": 0.4118,
+    "gold14A": -362
+   },
+   "Chogath|MonkeyKing": {
+    "games": 30,
+    "winA": 0.5,
+    "gold14A": -45
+   },
+   "Chogath|Nocturne": {
+    "games": 20,
+    "winA": 0.48,
+    "gold14A": 8
+   },
+   "Chogath|Qiyana": {
+    "games": 31,
+    "winA": 0.4918,
+    "gold14A": -344
+   },
+   "Chogath|Shyvana": {
+    "games": 21,
+    "winA": 0.451,
+    "gold14A": -578
+   },
+   "Chogath|Sylas": {
+    "games": 23,
+    "winA": 0.4528,
+    "gold14A": -307
+   },
+   "Chogath|Talon": {
+    "games": 28,
+    "winA": 0.3966,
+    "gold14A": -1030
+   },
+   "Chogath|Vi": {
+    "games": 21,
+    "winA": 0.5098,
+    "gold14A": 98
+   },
+   "Diana|Ekko": {
+    "games": 22,
+    "winA": 0.4231,
+    "gold14A": 157
+   },
+   "Diana|Hecarim": {
+    "games": 28,
+    "winA": 0.4655,
+    "gold14A": -262
+   },
+   "Diana|Kayn": {
+    "games": 40,
+    "winA": 0.4571,
+    "gold14A": 616
+   },
+   "Diana|LeeSin": {
+    "games": 29,
+    "winA": 0.4407,
+    "gold14A": -236
+   },
+   "Diana|Viego": {
+    "games": 22,
+    "winA": 0.4231,
+    "gold14A": -347
+   },
+   "Ekko|Graves": {
+    "games": 27,
+    "winA": 0.5263,
+    "gold14A": 189
+   },
+   "Ekko|Hecarim": {
+    "games": 43,
+    "winA": 0.5205,
+    "gold14A": -190
+   },
+   "Ekko|JarvanIV": {
+    "games": 28,
+    "winA": 0.5,
+    "gold14A": 184
+   },
+   "Ekko|Kayn": {
+    "games": 72,
+    "winA": 0.5294,
+    "gold14A": 154
+   },
+   "Ekko|Khazix": {
+    "games": 32,
+    "winA": 0.5323,
+    "gold14A": -436
+   },
+   "Ekko|LeeSin": {
+    "games": 61,
+    "winA": 0.5055,
+    "gold14A": -46
+   },
+   "Ekko|MasterYi": {
+    "games": 40,
+    "winA": 0.4857,
+    "gold14A": -347
+   },
+   "Ekko|MonkeyKing": {
+    "games": 40,
+    "winA": 0.4714,
+    "gold14A": -275
+   },
+   "Ekko|Nocturne": {
+    "games": 28,
+    "winA": 0.6207,
+    "gold14A": 336
+   },
+   "Ekko|Qiyana": {
+    "games": 32,
+    "winA": 0.4677,
+    "gold14A": -295
+   },
+   "Ekko|Rengar": {
+    "games": 31,
+    "winA": 0.4426,
+    "gold14A": -151
+   },
+   "Ekko|Shaco": {
+    "games": 37,
+    "winA": 0.5672,
+    "gold14A": 57
+   },
+   "Ekko|Sylas": {
+    "games": 25,
+    "winA": 0.5818,
+    "gold14A": 288
+   },
+   "Ekko|Talon": {
+    "games": 29,
+    "winA": 0.5085,
+    "gold14A": -471
+   },
+   "Ekko|Udyr": {
+    "games": 22,
+    "winA": 0.4038,
+    "gold14A": -198
+   },
+   "Ekko|Vi": {
+    "games": 21,
+    "winA": 0.4706,
+    "gold14A": 317
+   },
+   "Ekko|Viego": {
+    "games": 37,
+    "winA": 0.4776,
+    "gold14A": -321
+   },
+   "Evelynn|Kayn": {
+    "games": 23,
+    "winA": 0.6038,
+    "gold14A": 61
+   },
+   "FiddleSticks|Kayn": {
+    "games": 25,
+    "winA": 0.5636,
+    "gold14A": -130
+   },
+   "Graves|Hecarim": {
+    "games": 24,
+    "winA": 0.4444,
+    "gold14A": -189
+   },
+   "Graves|Kayn": {
+    "games": 44,
+    "winA": 0.5135,
+    "gold14A": 149
+   },
+   "Graves|LeeSin": {
+    "games": 37,
+    "winA": 0.597,
+    "gold14A": 239
+   },
+   "Graves|MonkeyKing": {
+    "games": 26,
+    "winA": 0.4107,
+    "gold14A": -147
+   },
+   "Graves|Qiyana": {
+    "games": 26,
+    "winA": 0.5357,
+    "gold14A": -296
+   },
+   "Graves|Talon": {
+    "games": 23,
+    "winA": 0.4717,
+    "gold14A": -272
+   },
+   "Graves|Viego": {
+    "games": 20,
+    "winA": 0.54,
+    "gold14A": -126
+   },
+   "Hecarim|JarvanIV": {
+    "games": 20,
+    "winA": 0.5,
+    "gold14A": 464
+   },
+   "Hecarim|Kayn": {
+    "games": 58,
+    "winA": 0.4886,
+    "gold14A": 452
+   },
+   "Hecarim|LeeSin": {
+    "games": 46,
+    "winA": 0.5658,
+    "gold14A": 156
+   },
+   "Hecarim|Lillia": {
+    "games": 23,
+    "winA": 0.4528,
+    "gold14A": 58
+   },
+   "Hecarim|MasterYi": {
+    "games": 22,
+    "winA": 0.5,
+    "gold14A": 29
+   },
+   "Hecarim|MonkeyKing": {
+    "games": 36,
+    "winA": 0.4242,
+    "gold14A": 225
+   },
+   "Hecarim|Qiyana": {
+    "games": 25,
+    "winA": 0.5636,
+    "gold14A": 615
+   },
+   "Hecarim|Rengar": {
+    "games": 27,
+    "winA": 0.4386,
+    "gold14A": 293
+   },
+   "Hecarim|Shaco": {
+    "games": 26,
+    "winA": 0.5179,
+    "gold14A": 544
+   },
+   "Hecarim|Sylas": {
+    "games": 21,
+    "winA": 0.4902,
+    "gold14A": 755
+   },
+   "Hecarim|Talon": {
+    "games": 20,
+    "winA": 0.46,
+    "gold14A": -689
+   },
+   "Hecarim|Udyr": {
+    "games": 20,
+    "winA": 0.48,
+    "gold14A": 326
+   },
+   "Hecarim|Viego": {
+    "games": 36,
+    "winA": 0.4697,
+    "gold14A": -50
+   },
+   "JarvanIV|Kayn": {
+    "games": 34,
+    "winA": 0.5156,
+    "gold14A": 284
+   },
+   "JarvanIV|LeeSin": {
+    "games": 43,
+    "winA": 0.5753,
+    "gold14A": 48
+   },
+   "JarvanIV|MonkeyKing": {
+    "games": 25,
+    "winA": 0.4909,
+    "gold14A": -121
+   },
+   "Kayn|Khazix": {
+    "games": 52,
+    "winA": 0.5122,
+    "gold14A": -586
+   },
+   "Kayn|Kindred": {
+    "games": 23,
+    "winA": 0.5094,
+    "gold14A": -433
+   },
+   "Kayn|LeeSin": {
+    "games": 106,
+    "winA": 0.5,
+    "gold14A": -94
+   },
+   "Kayn|Lillia": {
+    "games": 23,
+    "winA": 0.5094,
+    "gold14A": -134
+   },
+   "Kayn|MasterYi": {
+    "games": 56,
+    "winA": 0.4767,
+    "gold14A": -306
+   },
+   "Kayn|MonkeyKing": {
+    "games": 54,
+    "winA": 0.4405,
+    "gold14A": -18
+   },
+   "Kayn|Nocturne": {
+    "games": 46,
+    "winA": 0.5132,
+    "gold14A": -159
+   },
+   "Kayn|Qiyana": {
+    "games": 41,
+    "winA": 0.4648,
+    "gold14A": -295
+   },
+   "Kayn|Quinn": {
+    "games": 33,
+    "winA": 0.5397,
+    "gold14A": -141
+   },
+   "Kayn|Rammus": {
+    "games": 23,
+    "winA": 0.4528,
+    "gold14A": 332
+   },
+   "Kayn|Rengar": {
+    "games": 33,
+    "winA": 0.5079,
+    "gold14A": -275
+   },
+   "Kayn|Sejuani": {
+    "games": 31,
+    "winA": 0.5574,
+    "gold14A": 538
+   },
+   "Kayn|Shaco": {
+    "games": 35,
+    "winA": 0.5385,
+    "gold14A": 270
+   },
+   "Kayn|Shyvana": {
+    "games": 46,
+    "winA": 0.4868,
+    "gold14A": -10
+   },
+   "Kayn|Sylas": {
+    "games": 23,
+    "winA": 0.4717,
+    "gold14A": -326
+   },
+   "Kayn|Talon": {
+    "games": 34,
+    "winA": 0.4844,
+    "gold14A": -585
+   },
+   "Kayn|Udyr": {
+    "games": 29,
+    "winA": 0.4237,
+    "gold14A": -393
+   },
+   "Kayn|Vi": {
+    "games": 41,
+    "winA": 0.493,
+    "gold14A": -25
+   },
+   "Kayn|Viego": {
+    "games": 61,
+    "winA": 0.5385,
+    "gold14A": -357
+   },
+   "Kayn|Warwick": {
+    "games": 23,
+    "winA": 0.4717,
+    "gold14A": -321
+   },
+   "Kayn|Zed": {
+    "games": 25,
+    "winA": 0.5455,
+    "gold14A": -413
+   },
+   "Khazix|LeeSin": {
+    "games": 51,
+    "winA": 0.4691,
+    "gold14A": 205
+   },
+   "Khazix|MasterYi": {
+    "games": 26,
+    "winA": 0.5714,
+    "gold14A": 682
+   },
+   "Khazix|MonkeyKing": {
+    "games": 20,
+    "winA": 0.52,
+    "gold14A": 746
+   },
+   "Khazix|Nocturne": {
+    "games": 23,
+    "winA": 0.5472,
+    "gold14A": 661
+   },
+   "Khazix|Qiyana": {
+    "games": 21,
+    "winA": 0.5098,
+    "gold14A": 623
+   },
+   "Khazix|Rengar": {
+    "games": 28,
+    "winA": 0.4655,
+    "gold14A": 284
+   },
+   "Khazix|Talon": {
+    "games": 29,
+    "winA": 0.4746,
+    "gold14A": 212
+   },
+   "Khazix|Viego": {
+    "games": 22,
+    "winA": 0.5,
+    "gold14A": 282
+   },
+   "LeeSin|MasterYi": {
+    "games": 47,
+    "winA": 0.5065,
+    "gold14A": 129
+   },
+   "LeeSin|MonkeyKing": {
+    "games": 55,
+    "winA": 0.5294,
+    "gold14A": 325
+   },
+   "LeeSin|Nocturne": {
+    "games": 39,
+    "winA": 0.5942,
+    "gold14A": -36
+   },
+   "LeeSin|Qiyana": {
+    "games": 37,
+    "winA": 0.5224,
+    "gold14A": 73
+   },
+   "LeeSin|Quinn": {
+    "games": 21,
+    "winA": 0.4902,
+    "gold14A": -354
+   },
+   "LeeSin|Rengar": {
+    "games": 38,
+    "winA": 0.5441,
+    "gold14A": 55
+   },
+   "LeeSin|Sejuani": {
+    "games": 23,
+    "winA": 0.5094,
+    "gold14A": 148
+   },
+   "LeeSin|Shaco": {
+    "games": 48,
+    "winA": 0.5256,
+    "gold14A": 405
+   },
+   "LeeSin|Shyvana": {
+    "games": 35,
+    "winA": 0.4462,
+    "gold14A": -63
+   },
+   "LeeSin|Sylas": {
+    "games": 25,
+    "winA": 0.6182,
+    "gold14A": 113
+   },
+   "LeeSin|Talon": {
+    "games": 44,
+    "winA": 0.5676,
+    "gold14A": 355
+   },
+   "LeeSin|Udyr": {
+    "games": 24,
+    "winA": 0.463,
+    "gold14A": 75
+   },
+   "LeeSin|Vi": {
+    "games": 41,
+    "winA": 0.4648,
+    "gold14A": 675
+   },
+   "LeeSin|Viego": {
+    "games": 59,
+    "winA": 0.5281,
+    "gold14A": 31
+   },
+   "LeeSin|Warwick": {
+    "games": 20,
+    "winA": 0.54,
+    "gold14A": 177
+   },
+   "Lillia|Shaco": {
+    "games": 21,
+    "winA": 0.5686,
+    "gold14A": 268
+   },
+   "Lillia|Viego": {
+    "games": 22,
+    "winA": 0.5577,
+    "gold14A": -626
+   },
+   "MasterYi|MonkeyKing": {
+    "games": 29,
+    "winA": 0.5254,
+    "gold14A": 494
+   },
+   "MasterYi|Qiyana": {
+    "games": 24,
+    "winA": 0.4815,
+    "gold14A": 2
+   },
+   "MasterYi|Quinn": {
+    "games": 24,
+    "winA": 0.5741,
+    "gold14A": 332
+   },
+   "MasterYi|Rammus": {
+    "games": 27,
+    "winA": 0.4561,
+    "gold14A": 734
+   },
+   "MasterYi|Rengar": {
+    "games": 20,
+    "winA": 0.48,
+    "gold14A": -473
+   },
+   "MasterYi|Shaco": {
+    "games": 24,
+    "winA": 0.5556,
+    "gold14A": -81
+   },
+   "MasterYi|Talon": {
+    "games": 25,
+    "winA": 0.5636,
+    "gold14A": 388
+   },
+   "MasterYi|Vi": {
+    "games": 27,
+    "winA": 0.5088,
+    "gold14A": 448
+   },
+   "MasterYi|Viego": {
+    "games": 32,
+    "winA": 0.4516,
+    "gold14A": -135
+   },
+   "MonkeyKing|Qiyana": {
+    "games": 26,
+    "winA": 0.5357,
+    "gold14A": -616
+   },
+   "MonkeyKing|Rengar": {
+    "games": 24,
+    "winA": 0.4815,
+    "gold14A": 167
+   },
+   "MonkeyKing|Shaco": {
+    "games": 25,
+    "winA": 0.4727,
+    "gold14A": 213
+   },
+   "MonkeyKing|Shyvana": {
+    "games": 23,
+    "winA": 0.4906,
+    "gold14A": -249
+   },
+   "MonkeyKing|Talon": {
+    "games": 26,
+    "winA": 0.5179,
+    "gold14A": -92
+   },
+   "MonkeyKing|Vi": {
+    "games": 25,
+    "winA": 0.5636,
+    "gold14A": 119
+   },
+   "MonkeyKing|Viego": {
+    "games": 34,
+    "winA": 0.5156,
+    "gold14A": -396
+   },
+   "Nocturne|Shaco": {
+    "games": 20,
+    "winA": 0.48,
+    "gold14A": 292
+   },
+   "Qiyana|Rengar": {
+    "games": 26,
+    "winA": 0.4643,
+    "gold14A": 79
+   },
+   "Qiyana|Shaco": {
+    "games": 30,
+    "winA": 0.4667,
+    "gold14A": 321
+   },
+   "Qiyana|Talon": {
+    "games": 26,
+    "winA": 0.5714,
+    "gold14A": 530
+   },
+   "Qiyana|Viego": {
+    "games": 35,
+    "winA": 0.4769,
+    "gold14A": 18
+   },
+   "Rengar|Talon": {
+    "games": 28,
+    "winA": 0.5,
+    "gold14A": 251
+   },
+   "Shaco|Talon": {
+    "games": 20,
+    "winA": 0.44,
+    "gold14A": -564
+   },
+   "Shaco|Viego": {
+    "games": 29,
+    "winA": 0.5085,
+    "gold14A": -291
+   },
+   "Talon|Viego": {
+    "games": 22,
+    "winA": 0.5962,
+    "gold14A": 267
+   },
+   "Vi|Viego": {
+    "games": 24,
+    "winA": 0.5,
+    "gold14A": -438
+   }
+  },
+  "mid": {
+   "Ahri|Akali": {
+    "games": 29,
+    "winA": 0.5424,
+    "gold14A": -225
+   },
+   "Ahri|Azir": {
+    "games": 30,
+    "winA": 0.5167,
+    "gold14A": 617
+   },
+   "Ahri|Diana": {
+    "games": 31,
+    "winA": 0.4426,
+    "gold14A": -667
+   },
+   "Ahri|Ekko": {
+    "games": 26,
+    "winA": 0.5357,
+    "gold14A": -97
+   },
+   "Ahri|Fizz": {
+    "games": 50,
+    "winA": 0.5,
+    "gold14A": -305
+   },
+   "Ahri|Hwei": {
+    "games": 24,
+    "winA": 0.4074,
+    "gold14A": -332
+   },
+   "Ahri|Irelia": {
+    "games": 20,
+    "winA": 0.48,
+    "gold14A": -1245
+   },
+   "Ahri|Katarina": {
+    "games": 44,
+    "winA": 0.5,
+    "gold14A": -537
+   },
+   "Ahri|Leblanc": {
+    "games": 29,
+    "winA": 0.5254,
+    "gold14A": 408
+   },
+   "Ahri|Locke": {
+    "games": 54,
+    "winA": 0.4643,
+    "gold14A": -275
+   },
+   "Ahri|Lux": {
+    "games": 51,
+    "winA": 0.5309,
+    "gold14A": -185
+   },
+   "Ahri|Malzahar": {
+    "games": 48,
+    "winA": 0.4487,
+    "gold14A": 299
+   },
+   "Ahri|Mel": {
+    "games": 34,
+    "winA": 0.4688,
+    "gold14A": -620
+   },
+   "Ahri|Qiyana": {
+    "games": 21,
+    "winA": 0.549,
+    "gold14A": -130
+   },
+   "Ahri|Sylas": {
+    "games": 42,
+    "winA": 0.4444,
+    "gold14A": -274
+   },
+   "Ahri|Syndra": {
+    "games": 40,
+    "winA": 0.5571,
+    "gold14A": -65
+   },
+   "Ahri|TwistedFate": {
+    "games": 23,
+    "winA": 0.5472,
+    "gold14A": -139
+   },
+   "Ahri|Veigar": {
+    "games": 32,
+    "winA": 0.5323,
+    "gold14A": 25
+   },
+   "Ahri|Viktor": {
+    "games": 53,
+    "winA": 0.4819,
+    "gold14A": -54
+   },
+   "Ahri|Vladimir": {
+    "games": 52,
+    "winA": 0.4634,
+    "gold14A": -265
+   },
+   "Ahri|Xerath": {
+    "games": 28,
+    "winA": 0.4483,
+    "gold14A": -175
+   },
+   "Ahri|Yasuo": {
+    "games": 80,
+    "winA": 0.4818,
+    "gold14A": -173
+   },
+   "Ahri|Yone": {
+    "games": 53,
+    "winA": 0.494,
+    "gold14A": 172
+   },
+   "Ahri|Zed": {
+    "games": 68,
+    "winA": 0.551,
+    "gold14A": -361
+   },
+   "Akali|Fizz": {
+    "games": 21,
+    "winA": 0.4314,
+    "gold14A": -412
+   },
+   "Akali|Locke": {
+    "games": 36,
+    "winA": 0.5606,
+    "gold14A": -50
+   },
+   "Akali|Malzahar": {
+    "games": 20,
+    "winA": 0.52,
+    "gold14A": 406
+   },
+   "Akali|Sylas": {
+    "games": 22,
+    "winA": 0.5,
+    "gold14A": 242
+   },
+   "Akali|Viktor": {
+    "games": 26,
+    "winA": 0.5,
+    "gold14A": 412
+   },
+   "Akali|Vladimir": {
+    "games": 27,
+    "winA": 0.4737,
+    "gold14A": 157
+   },
+   "Akali|Yasuo": {
+    "games": 53,
+    "winA": 0.4337,
+    "gold14A": -182
+   },
+   "Akali|Yone": {
+    "games": 27,
+    "winA": 0.5263,
+    "gold14A": 353
+   },
+   "Akali|Zed": {
+    "games": 47,
+    "winA": 0.4545,
+    "gold14A": -413
+   },
+   "Aurora|Yasuo": {
+    "games": 20,
+    "winA": 0.46,
+    "gold14A": -481
+   },
+   "Azir|Fizz": {
+    "games": 20,
+    "winA": 0.48,
+    "gold14A": -398
+   },
+   "Azir|Lux": {
+    "games": 29,
+    "winA": 0.4576,
+    "gold14A": -563
+   },
+   "Azir|Syndra": {
+    "games": 20,
+    "winA": 0.44,
+    "gold14A": -535
+   },
+   "Azir|Vladimir": {
+    "games": 25,
+    "winA": 0.5455,
+    "gold14A": 16
+   },
+   "Azir|Yasuo": {
+    "games": 41,
+    "winA": 0.507,
+    "gold14A": -368
+   },
+   "Azir|Yone": {
+    "games": 20,
+    "winA": 0.52,
+    "gold14A": -293
+   },
+   "Azir|Zed": {
+    "games": 26,
+    "winA": 0.5714,
+    "gold14A": -615
+   },
+   "Diana|Fizz": {
+    "games": 24,
+    "winA": 0.5,
+    "gold14A": 855
+   },
+   "Diana|Katarina": {
+    "games": 28,
+    "winA": 0.5172,
+    "gold14A": 621
+   },
+   "Diana|Locke": {
+    "games": 26,
+    "winA": 0.5536,
+    "gold14A": -163
+   },
+   "Diana|Lux": {
+    "games": 24,
+    "winA": 0.4815,
+    "gold14A": 334
+   },
+   "Diana|Vladimir": {
+    "games": 29,
+    "winA": 0.5424,
+    "gold14A": 651
+   },
+   "Diana|Yasuo": {
+    "games": 33,
+    "winA": 0.4286,
+    "gold14A": -486
+   },
+   "Diana|Yone": {
+    "games": 25,
+    "winA": 0.4727,
+    "gold14A": 753
+   },
+   "Diana|Zed": {
+    "games": 46,
+    "winA": 0.5,
+    "gold14A": -46
+   },
+   "Ekko|Locke": {
+    "games": 26,
+    "winA": 0.5714,
+    "gold14A": -116
+   },
+   "Ekko|Vladimir": {
+    "games": 21,
+    "winA": 0.5294,
+    "gold14A": 502
+   },
+   "Ekko|Yasuo": {
+    "games": 30,
+    "winA": 0.55,
+    "gold14A": -405
+   },
+   "Ekko|Zed": {
+    "games": 39,
+    "winA": 0.5652,
+    "gold14A": 134
+   },
+   "Fizz|Katarina": {
+    "games": 28,
+    "winA": 0.5172,
+    "gold14A": 422
+   },
+   "Fizz|Lissandra": {
+    "games": 28,
+    "winA": 0.5517,
+    "gold14A": -254
+   },
+   "Fizz|Locke": {
+    "games": 24,
+    "winA": 0.5,
+    "gold14A": -374
+   },
+   "Fizz|Lux": {
+    "games": 31,
+    "winA": 0.5082,
+    "gold14A": 88
+   },
+   "Fizz|Syndra": {
+    "games": 24,
+    "winA": 0.4444,
+    "gold14A": 294
+   },
+   "Fizz|Veigar": {
+    "games": 24,
+    "winA": 0.5,
+    "gold14A": 511
+   },
+   "Fizz|Viktor": {
+    "games": 29,
+    "winA": 0.4068,
+    "gold14A": 77
+   },
+   "Fizz|Vladimir": {
+    "games": 33,
+    "winA": 0.5238,
+    "gold14A": 739
+   },
+   "Fizz|Yasuo": {
+    "games": 59,
+    "winA": 0.5169,
+    "gold14A": -45
+   },
+   "Fizz|Yone": {
+    "games": 25,
+    "winA": 0.4909,
+    "gold14A": 73
+   },
+   "Fizz|Zed": {
+    "games": 54,
+    "winA": 0.5,
+    "gold14A": 32
+   },
+   "Hwei|Vladimir": {
+    "games": 20,
+    "winA": 0.52,
+    "gold14A": 272
+   },
+   "Hwei|Yasuo": {
+    "games": 25,
+    "winA": 0.5091,
+    "gold14A": -483
+   },
+   "Hwei|Zed": {
+    "games": 26,
+    "winA": 0.5,
+    "gold14A": -203
+   },
+   "Irelia|Vladimir": {
+    "games": 28,
+    "winA": 0.5172,
+    "gold14A": 478
+   },
+   "Irelia|Yasuo": {
+    "games": 23,
+    "winA": 0.4717,
+    "gold14A": 559
+   },
+   "Irelia|Zed": {
+    "games": 22,
+    "winA": 0.5385,
+    "gold14A": 429
+   },
+   "Kassadin|Locke": {
+    "games": 26,
+    "winA": 0.5714,
+    "gold14A": -400
+   },
+   "Kassadin|Vladimir": {
+    "games": 20,
+    "winA": 0.56,
+    "gold14A": -362
+   },
+   "Kassadin|Yasuo": {
+    "games": 31,
+    "winA": 0.5574,
+    "gold14A": -222
+   },
+   "Kassadin|Yone": {
+    "games": 26,
+    "winA": 0.5179,
+    "gold14A": -71
+   },
+   "Katarina|Leblanc": {
+    "games": 32,
+    "winA": 0.4677,
+    "gold14A": -90
+   },
+   "Katarina|Locke": {
+    "games": 37,
+    "winA": 0.4328,
+    "gold14A": -352
+   },
+   "Katarina|Lux": {
+    "games": 23,
+    "winA": 0.5094,
+    "gold14A": 30
+   },
+   "Katarina|Malzahar": {
+    "games": 22,
+    "winA": 0.5,
+    "gold14A": 395
+   },
+   "Katarina|Sylas": {
+    "games": 23,
+    "winA": 0.5094,
+    "gold14A": -152
+   },
+   "Katarina|Syndra": {
+    "games": 26,
+    "winA": 0.5,
+    "gold14A": 19
+   },
+   "Katarina|Veigar": {
+    "games": 20,
+    "winA": 0.54,
+    "gold14A": 707
+   },
+   "Katarina|Viktor": {
+    "games": 39,
+    "winA": 0.4638,
+    "gold14A": -120
+   },
+   "Katarina|Vladimir": {
+    "games": 44,
+    "winA": 0.5,
+    "gold14A": 160
+   },
+   "Katarina|Yasuo": {
+    "games": 55,
+    "winA": 0.4588,
+    "gold14A": -179
+   },
+   "Katarina|Yone": {
+    "games": 32,
+    "winA": 0.5484,
+    "gold14A": 145
+   },
+   "Katarina|Zed": {
+    "games": 48,
+    "winA": 0.4231,
+    "gold14A": -368
+   },
+   "Leblanc|Locke": {
+    "games": 20,
+    "winA": 0.5,
+    "gold14A": 168
+   },
+   "Leblanc|Lux": {
+    "games": 20,
+    "winA": 0.5,
+    "gold14A": 87
+   },
+   "Leblanc|Yasuo": {
+    "games": 23,
+    "winA": 0.5283,
+    "gold14A": -110
+   },
+   "Leblanc|Yone": {
+    "games": 21,
+    "winA": 0.5686,
+    "gold14A": 567
+   },
+   "Leblanc|Zed": {
+    "games": 28,
+    "winA": 0.5517,
+    "gold14A": -175
+   },
+   "Lissandra|Vladimir": {
+    "games": 25,
+    "winA": 0.4909,
+    "gold14A": 303
+   },
+   "Lissandra|Yasuo": {
+    "games": 46,
+    "winA": 0.4868,
+    "gold14A": 203
+   },
+   "Lissandra|Zed": {
+    "games": 41,
+    "winA": 0.4789,
+    "gold14A": -572
+   },
+   "Locke|Lux": {
+    "games": 36,
+    "winA": 0.4848,
+    "gold14A": -226
+   },
+   "Locke|Malzahar": {
+    "games": 20,
+    "winA": 0.58,
+    "gold14A": 1520
+   },
+   "Locke|Qiyana": {
+    "games": 21,
+    "winA": 0.4314,
+    "gold14A": -85
+   },
+   "Locke|Syndra": {
+    "games": 20,
+    "winA": 0.52,
+    "gold14A": 807
+   },
+   "Locke|Viktor": {
+    "games": 27,
+    "winA": 0.5263,
+    "gold14A": 904
+   },
+   "Locke|Vladimir": {
+    "games": 31,
+    "winA": 0.4918,
+    "gold14A": 888
+   },
+   "Locke|Yasuo": {
+    "games": 46,
+    "winA": 0.4737,
+    "gold14A": 251
+   },
+   "Locke|Yone": {
+    "games": 26,
+    "winA": 0.4821,
+    "gold14A": 54
+   },
+   "Locke|Zed": {
+    "games": 45,
+    "winA": 0.5067,
+    "gold14A": -392
+   },
+   "Lux|Malzahar": {
+    "games": 25,
+    "winA": 0.5091,
+    "gold14A": 181
+   },
+   "Lux|Qiyana": {
+    "games": 22,
+    "winA": 0.4808,
+    "gold14A": -128
+   },
+   "Lux|Syndra": {
+    "games": 36,
+    "winA": 0.4545,
+    "gold14A": 7
+   },
+   "Lux|Viktor": {
+    "games": 29,
+    "winA": 0.4915,
+    "gold14A": 10
+   },
+   "Lux|Vladimir": {
+    "games": 33,
+    "winA": 0.4603,
+    "gold14A": 284
+   },
+   "Lux|Yasuo": {
+    "games": 31,
+    "winA": 0.4918,
+    "gold14A": -242
+   },
+   "Lux|Yone": {
+    "games": 38,
+    "winA": 0.5147,
+    "gold14A": 477
+   },
+   "Lux|Zed": {
+    "games": 54,
+    "winA": 0.631,
+    "gold14A": 29
+   },
+   "Malzahar|Syndra": {
+    "games": 21,
+    "winA": 0.4706,
+    "gold14A": -149
+   },
+   "Malzahar|TwistedFate": {
+    "games": 21,
+    "winA": 0.4902,
+    "gold14A": -753
+   },
+   "Malzahar|Viktor": {
+    "games": 37,
+    "winA": 0.4627,
+    "gold14A": -117
+   },
+   "Malzahar|Vladimir": {
+    "games": 53,
+    "winA": 0.506,
+    "gold14A": 414
+   },
+   "Malzahar|Yasuo": {
+    "games": 54,
+    "winA": 0.5714,
+    "gold14A": -95
+   },
+   "Malzahar|Yone": {
+    "games": 21,
+    "winA": 0.4706,
+    "gold14A": -957
+   },
+   "Malzahar|Zed": {
+    "games": 50,
+    "winA": 0.55,
+    "gold14A": -502
+   },
+   "Mel|Yasuo": {
+    "games": 23,
+    "winA": 0.4717,
+    "gold14A": -210
+   },
+   "Orianna|Syndra": {
+    "games": 20,
+    "winA": 0.52,
+    "gold14A": -436
+   },
+   "Orianna|Vladimir": {
+    "games": 20,
+    "winA": 0.54,
+    "gold14A": -95
+   },
+   "Qiyana|Zed": {
+    "games": 26,
+    "winA": 0.4643,
+    "gold14A": 235
+   },
+   "Sylas|Syndra": {
+    "games": 21,
+    "winA": 0.4902,
+    "gold14A": -232
+   },
+   "Sylas|Vladimir": {
+    "games": 23,
+    "winA": 0.4151,
+    "gold14A": 253
+   },
+   "Sylas|Yasuo": {
+    "games": 32,
+    "winA": 0.5161,
+    "gold14A": -119
+   },
+   "Sylas|Yone": {
+    "games": 27,
+    "winA": 0.4912,
+    "gold14A": -437
+   },
+   "Sylas|Zed": {
+    "games": 23,
+    "winA": 0.5094,
+    "gold14A": -627
+   },
+   "Syndra|Veigar": {
+    "games": 20,
+    "winA": 0.6,
+    "gold14A": 546
+   },
+   "Syndra|Viktor": {
+    "games": 43,
+    "winA": 0.5205,
+    "gold14A": 528
+   },
+   "Syndra|Vladimir": {
+    "games": 29,
+    "winA": 0.4576,
+    "gold14A": 86
+   },
+   "Syndra|Xerath": {
+    "games": 26,
+    "winA": 0.5,
+    "gold14A": -4
+   },
+   "Syndra|Yasuo": {
+    "games": 36,
+    "winA": 0.5152,
+    "gold14A": -188
+   },
+   "Syndra|Yone": {
+    "games": 30,
+    "winA": 0.5,
+    "gold14A": 363
+   },
+   "Syndra|Zed": {
+    "games": 36,
+    "winA": 0.4091,
+    "gold14A": -790
+   },
+   "TwistedFate|Yone": {
+    "games": 24,
+    "winA": 0.5185,
+    "gold14A": -88
+   },
+   "Veigar|Viktor": {
+    "games": 23,
+    "winA": 0.5283,
+    "gold14A": 361
+   },
+   "Veigar|Vladimir": {
+    "games": 20,
+    "winA": 0.46,
+    "gold14A": -59
+   },
+   "Veigar|Yasuo": {
+    "games": 23,
+    "winA": 0.5283,
+    "gold14A": -132
+   },
+   "Veigar|Zed": {
+    "games": 22,
+    "winA": 0.5,
+    "gold14A": -594
+   },
+   "Vex|Yasuo": {
+    "games": 31,
+    "winA": 0.5902,
+    "gold14A": 441
+   },
+   "Viktor|Vladimir": {
+    "games": 31,
+    "winA": 0.541,
+    "gold14A": -273
+   },
+   "Viktor|Yasuo": {
+    "games": 46,
+    "winA": 0.4605,
+    "gold14A": -140
+   },
+   "Viktor|Yone": {
+    "games": 31,
+    "winA": 0.5902,
+    "gold14A": -195
+   },
+   "Viktor|Zed": {
+    "games": 52,
+    "winA": 0.5244,
+    "gold14A": -346
+   },
+   "Vladimir|Yasuo": {
+    "games": 70,
+    "winA": 0.47,
+    "gold14A": -114
+   },
+   "Vladimir|Yone": {
+    "games": 44,
+    "winA": 0.527,
+    "gold14A": 221
+   },
+   "Vladimir|Zed": {
+    "games": 64,
+    "winA": 0.4787,
+    "gold14A": -344
+   },
+   "Yasuo|Yone": {
+    "games": 65,
+    "winA": 0.5474,
+    "gold14A": -57
+   },
+   "Yasuo|Zed": {
+    "games": 86,
+    "winA": 0.4569,
+    "gold14A": -64
+   },
+   "Yone|Zed": {
+    "games": 62,
+    "winA": 0.4891,
+    "gold14A": -1006
+   }
+  },
+  "adc": {
+   "Aphelios|Ashe": {
+    "games": 24,
+    "winA": 0.537,
+    "gold14A": 698
+   },
+   "Aphelios|Caitlyn": {
+    "games": 61,
+    "winA": 0.4615,
+    "gold14A": -316
+   },
+   "Aphelios|Ezreal": {
+    "games": 30,
+    "winA": 0.5167,
+    "gold14A": -230
+   },
+   "Aphelios|Jhin": {
+    "games": 53,
+    "winA": 0.506,
+    "gold14A": 92
+   },
+   "Aphelios|Jinx": {
+    "games": 81,
+    "winA": 0.4324,
+    "gold14A": -244
+   },
+   "Aphelios|Kaisa": {
+    "games": 53,
+    "winA": 0.494,
+    "gold14A": -51
+   },
+   "Aphelios|Lucian": {
+    "games": 35,
+    "winA": 0.4923,
+    "gold14A": -91
+   },
+   "Aphelios|MissFortune": {
+    "games": 20,
+    "winA": 0.42,
+    "gold14A": -555
+   },
+   "Aphelios|Tristana": {
+    "games": 31,
+    "winA": 0.5082,
+    "gold14A": -160
+   },
+   "Aphelios|Yunara": {
+    "games": 41,
+    "winA": 0.4648,
+    "gold14A": -430
+   },
+   "Ashe|Caitlyn": {
+    "games": 93,
+    "winA": 0.4797,
+    "gold14A": -336
+   },
+   "Ashe|Ezreal": {
+    "games": 67,
+    "winA": 0.4948,
+    "gold14A": -615
+   },
+   "Ashe|Jhin": {
+    "games": 75,
+    "winA": 0.5048,
+    "gold14A": -374
+   },
+   "Ashe|Jinx": {
+    "games": 104,
+    "winA": 0.4851,
+    "gold14A": -108
+   },
+   "Ashe|Kaisa": {
+    "games": 105,
+    "winA": 0.4963,
+    "gold14A": -45
+   },
+   "Ashe|Kalista": {
+    "games": 23,
+    "winA": 0.4528,
+    "gold14A": -913
+   },
+   "Ashe|Lucian": {
+    "games": 67,
+    "winA": 0.5052,
+    "gold14A": -291
+   },
+   "Ashe|MissFortune": {
+    "games": 32,
+    "winA": 0.5161,
+    "gold14A": -481
+   },
+   "Ashe|Sivir": {
+    "games": 44,
+    "winA": 0.473,
+    "gold14A": 58
+   },
+   "Ashe|Tristana": {
+    "games": 41,
+    "winA": 0.4789,
+    "gold14A": -303
+   },
+   "Ashe|Twitch": {
+    "games": 25,
+    "winA": 0.4364,
+    "gold14A": -503
+   },
+   "Ashe|Vayne": {
+    "games": 25,
+    "winA": 0.4364,
+    "gold14A": -106
+   },
+   "Ashe|Yunara": {
+    "games": 64,
+    "winA": 0.4574,
+    "gold14A": -279
+   },
+   "Caitlyn|Draven": {
+    "games": 32,
+    "winA": 0.5,
+    "gold14A": -623
+   },
+   "Caitlyn|Ezreal": {
+    "games": 163,
+    "winA": 0.5596,
+    "gold14A": 56
+   },
+   "Caitlyn|Jhin": {
+    "games": 181,
+    "winA": 0.5024,
+    "gold14A": -217
+   },
+   "Caitlyn|Jinx": {
+    "games": 240,
+    "winA": 0.5,
+    "gold14A": 313
+   },
+   "Caitlyn|Kaisa": {
+    "games": 155,
+    "winA": 0.4973,
+    "gold14A": 146
+   },
+   "Caitlyn|Kalista": {
+    "games": 30,
+    "winA": 0.4667,
+    "gold14A": -101
+   },
+   "Caitlyn|Lucian": {
+    "games": 116,
+    "winA": 0.4932,
+    "gold14A": -70
+   },
+   "Caitlyn|MissFortune": {
+    "games": 79,
+    "winA": 0.4954,
+    "gold14A": 179
+   },
+   "Caitlyn|Samira": {
+    "games": 31,
+    "winA": 0.4754,
+    "gold14A": -646
+   },
+   "Caitlyn|Sivir": {
+    "games": 93,
+    "winA": 0.5285,
+    "gold14A": 188
+   },
+   "Caitlyn|Smolder": {
+    "games": 37,
+    "winA": 0.5224,
+    "gold14A": 816
+   },
+   "Caitlyn|Tristana": {
+    "games": 83,
+    "winA": 0.4513,
+    "gold14A": -182
+   },
+   "Caitlyn|Twitch": {
+    "games": 46,
+    "winA": 0.4605,
+    "gold14A": 378
+   },
+   "Caitlyn|Varus": {
+    "games": 23,
+    "winA": 0.4528,
+    "gold14A": 396
+   },
+   "Caitlyn|Vayne": {
+    "games": 39,
+    "winA": 0.4638,
+    "gold14A": -89
+   },
+   "Caitlyn|Xayah": {
+    "games": 38,
+    "winA": 0.5147,
+    "gold14A": 737
+   },
+   "Caitlyn|Yasuo": {
+    "games": 32,
+    "winA": 0.5161,
+    "gold14A": -155
+   },
+   "Caitlyn|Yunara": {
+    "games": 88,
+    "winA": 0.5085,
+    "gold14A": 282
+   },
+   "Caitlyn|Zeri": {
+    "games": 38,
+    "winA": 0.4853,
+    "gold14A": -95
+   },
+   "Caitlyn|Ziggs": {
+    "games": 21,
+    "winA": 0.5098,
+    "gold14A": -118
+   },
+   "Corki|Jinx": {
+    "games": 24,
+    "winA": 0.463,
+    "gold14A": 579
+   },
+   "Corki|Kaisa": {
+    "games": 31,
+    "winA": 0.4754,
+    "gold14A": 124
+   },
+   "Corki|Tristana": {
+    "games": 20,
+    "winA": 0.54,
+    "gold14A": 289
+   },
+   "Draven|Ezreal": {
+    "games": 28,
+    "winA": 0.5,
+    "gold14A": 804
+   },
+   "Draven|Jhin": {
+    "games": 33,
+    "winA": 0.5238,
+    "gold14A": 1152
+   },
+   "Draven|Jinx": {
+    "games": 41,
+    "winA": 0.5493,
+    "gold14A": 1072
+   },
+   "Draven|Kaisa": {
+    "games": 48,
+    "winA": 0.4872,
+    "gold14A": 912
+   },
+   "Draven|Lucian": {
+    "games": 26,
+    "winA": 0.4286,
+    "gold14A": 143
+   },
+   "Draven|Tristana": {
+    "games": 22,
+    "winA": 0.5192,
+    "gold14A": 579
+   },
+   "Draven|Yunara": {
+    "games": 29,
+    "winA": 0.4576,
+    "gold14A": 635
+   },
+   "Ezreal|Jhin": {
+    "games": 129,
+    "winA": 0.4277,
+    "gold14A": -267
+   },
+   "Ezreal|Jinx": {
+    "games": 124,
+    "winA": 0.4026,
+    "gold14A": 263
+   },
+   "Ezreal|Kaisa": {
+    "games": 152,
+    "winA": 0.4505,
+    "gold14A": 9
+   },
+   "Ezreal|Kalista": {
+    "games": 33,
+    "winA": 0.6032,
+    "gold14A": -485
+   },
+   "Ezreal|Lucian": {
+    "games": 99,
+    "winA": 0.4341,
+    "gold14A": -163
+   },
+   "Ezreal|MissFortune": {
+    "games": 43,
+    "winA": 0.4247,
+    "gold14A": -24
+   },
+   "Ezreal|Sivir": {
+    "games": 47,
+    "winA": 0.4545,
+    "gold14A": 139
+   },
+   "Ezreal|Smolder": {
+    "games": 25,
+    "winA": 0.5636,
+    "gold14A": 1072
+   },
+   "Ezreal|Tristana": {
+    "games": 60,
+    "winA": 0.4667,
+    "gold14A": -140
+   },
+   "Ezreal|Twitch": {
+    "games": 37,
+    "winA": 0.4776,
+    "gold14A": 292
+   },
+   "Ezreal|Varus": {
+    "games": 29,
+    "winA": 0.4068,
+    "gold14A": -592
+   },
+   "Ezreal|Vayne": {
+    "games": 53,
+    "winA": 0.4819,
+    "gold14A": 476
+   },
+   "Ezreal|Xayah": {
+    "games": 40,
+    "winA": 0.4429,
+    "gold14A": 387
+   },
+   "Ezreal|Yunara": {
+    "games": 66,
+    "winA": 0.4688,
+    "gold14A": 104
+   },
+   "Jhin|Jinx": {
+    "games": 181,
+    "winA": 0.4739,
+    "gold14A": 140
+   },
+   "Jhin|Kaisa": {
+    "games": 158,
+    "winA": 0.4894,
+    "gold14A": 46
+   },
+   "Jhin|Kalista": {
+    "games": 23,
+    "winA": 0.5283,
+    "gold14A": 126
+   },
+   "Jhin|KogMaw": {
+    "games": 28,
+    "winA": 0.4483,
+    "gold14A": 135
+   },
+   "Jhin|Lucian": {
+    "games": 98,
+    "winA": 0.5234,
+    "gold14A": -386
+   },
+   "Jhin|MissFortune": {
+    "games": 63,
+    "winA": 0.4516,
+    "gold14A": -229
+   },
+   "Jhin|Samira": {
+    "games": 31,
+    "winA": 0.5246,
+    "gold14A": -170
+   },
+   "Jhin|Sivir": {
+    "games": 75,
+    "winA": 0.4667,
+    "gold14A": -28
+   },
+   "Jhin|Smolder": {
+    "games": 37,
+    "winA": 0.5522,
+    "gold14A": 1025
+   },
+   "Jhin|Tristana": {
+    "games": 79,
+    "winA": 0.4587,
+    "gold14A": -320
+   },
+   "Jhin|Twitch": {
+    "games": 50,
+    "winA": 0.475,
+    "gold14A": 284
+   },
+   "Jhin|Vayne": {
+    "games": 51,
+    "winA": 0.4444,
+    "gold14A": 465
+   },
+   "Jhin|Xayah": {
+    "games": 53,
+    "winA": 0.4458,
+    "gold14A": 318
+   },
+   "Jhin|Yunara": {
+    "games": 68,
+    "winA": 0.5204,
+    "gold14A": -30
+   },
+   "Jhin|Zeri": {
+    "games": 33,
+    "winA": 0.5714,
+    "gold14A": 321
+   },
+   "Jhin|Ziggs": {
+    "games": 20,
+    "winA": 0.48,
+    "gold14A": 239
+   },
+   "Jinx|Kaisa": {
+    "games": 244,
+    "winA": 0.5292,
+    "gold14A": 126
+   },
+   "Jinx|Kalista": {
+    "games": 23,
+    "winA": 0.5472,
+    "gold14A": -421
+   },
+   "Jinx|KogMaw": {
+    "games": 35,
+    "winA": 0.6308,
+    "gold14A": -200
+   },
+   "Jinx|Lucian": {
+    "games": 98,
+    "winA": 0.5859,
+    "gold14A": -229
+   },
+   "Jinx|MissFortune": {
+    "games": 90,
+    "winA": 0.5333,
+    "gold14A": 102
+   },
+   "Jinx|Samira": {
+    "games": 35,
+    "winA": 0.5385,
+    "gold14A": -508
+   },
+   "Jinx|Sivir": {
+    "games": 109,
+    "winA": 0.5108,
+    "gold14A": -180
+   },
+   "Jinx|Smolder": {
+    "games": 53,
+    "winA": 0.494,
+    "gold14A": 271
+   },
+   "Jinx|Tristana": {
+    "games": 113,
+    "winA": 0.5245,
+    "gold14A": -381
+   },
+   "Jinx|Twitch": {
+    "games": 76,
+    "winA": 0.5472,
+    "gold14A": 271
+   },
+   "Jinx|Varus": {
+    "games": 27,
+    "winA": 0.4386,
+    "gold14A": -552
+   },
+   "Jinx|Vayne": {
+    "games": 66,
+    "winA": 0.5833,
+    "gold14A": 223
+   },
+   "Jinx|Xayah": {
+    "games": 56,
+    "winA": 0.5465,
+    "gold14A": 158
+   },
+   "Jinx|Yasuo": {
+    "games": 25,
+    "winA": 0.4727,
+    "gold14A": -372
+   },
+   "Jinx|Yunara": {
+    "games": 147,
+    "winA": 0.4972,
+    "gold14A": -117
+   },
+   "Jinx|Zeri": {
+    "games": 44,
+    "winA": 0.5541,
+    "gold14A": -228
+   },
+   "Kaisa|Kalista": {
+    "games": 30,
+    "winA": 0.5167,
+    "gold14A": -254
+   },
+   "Kaisa|KogMaw": {
+    "games": 25,
+    "winA": 0.4545,
+    "gold14A": -103
+   },
+   "Kaisa|Lucian": {
+    "games": 137,
+    "winA": 0.4311,
+    "gold14A": -300
+   },
+   "Kaisa|MissFortune": {
+    "games": 67,
+    "winA": 0.4742,
+    "gold14A": -117
+   },
+   "Kaisa|Samira": {
+    "games": 45,
+    "winA": 0.44,
+    "gold14A": -333
+   },
+   "Kaisa|Sivir": {
+    "games": 94,
+    "winA": 0.4677,
+    "gold14A": -358
+   },
+   "Kaisa|Smolder": {
+    "games": 48,
+    "winA": 0.5513,
+    "gold14A": 700
+   },
+   "Kaisa|Tristana": {
+    "games": 132,
+    "winA": 0.5247,
+    "gold14A": -362
+   },
+   "Kaisa|Twitch": {
+    "games": 78,
+    "winA": 0.4815,
+    "gold14A": 456
+   },
+   "Kaisa|Varus": {
+    "games": 34,
+    "winA": 0.4219,
+    "gold14A": -357
+   },
+   "Kaisa|Vayne": {
+    "games": 80,
+    "winA": 0.5091,
+    "gold14A": 463
+   },
+   "Kaisa|Viktor": {
+    "games": 24,
+    "winA": 0.5185,
+    "gold14A": -162
+   },
+   "Kaisa|Xayah": {
+    "games": 79,
+    "winA": 0.5138,
+    "gold14A": -53
+   },
+   "Kaisa|Yasuo": {
+    "games": 34,
+    "winA": 0.5156,
+    "gold14A": -109
+   },
+   "Kaisa|Yunara": {
+    "games": 108,
+    "winA": 0.4058,
+    "gold14A": 90
+   },
+   "Kaisa|Zeri": {
+    "games": 45,
+    "winA": 0.4667,
+    "gold14A": -261
+   },
+   "Lucian|MissFortune": {
+    "games": 37,
+    "winA": 0.5522,
+    "gold14A": 125
+   },
+   "Lucian|Samira": {
+    "games": 23,
+    "winA": 0.4528,
+    "gold14A": -425
+   },
+   "Lucian|Sivir": {
+    "games": 42,
+    "winA": 0.5139,
+    "gold14A": 483
+   },
+   "Lucian|Smolder": {
+    "games": 30,
+    "winA": 0.5167,
+    "gold14A": 920
+   },
+   "Lucian|Tristana": {
+    "games": 49,
+    "winA": 0.5063,
+    "gold14A": -223
+   },
+   "Lucian|Twitch": {
+    "games": 45,
+    "winA": 0.48,
+    "gold14A": 255
+   },
+   "Lucian|Vayne": {
+    "games": 31,
+    "winA": 0.5738,
+    "gold14A": 1016
+   },
+   "Lucian|Xayah": {
+    "games": 32,
+    "winA": 0.5161,
+    "gold14A": 192
+   },
+   "Lucian|Yasuo": {
+    "games": 24,
+    "winA": 0.5,
+    "gold14A": 155
+   },
+   "Lucian|Yunara": {
+    "games": 70,
+    "winA": 0.45,
+    "gold14A": -66
+   },
+   "Lucian|Zeri": {
+    "games": 21,
+    "winA": 0.5686,
+    "gold14A": -195
+   },
+   "MissFortune|Sivir": {
+    "games": 38,
+    "winA": 0.5294,
+    "gold14A": 105
+   },
+   "MissFortune|Tristana": {
+    "games": 36,
+    "winA": 0.4848,
+    "gold14A": -772
+   },
+   "MissFortune|Twitch": {
+    "games": 30,
+    "winA": 0.4667,
+    "gold14A": 6
+   },
+   "MissFortune|Xayah": {
+    "games": 22,
+    "winA": 0.5192,
+    "gold14A": -285
+   },
+   "MissFortune|Yunara": {
+    "games": 34,
+    "winA": 0.4844,
+    "gold14A": 263
+   },
+   "Samira|Tristana": {
+    "games": 20,
+    "winA": 0.44,
+    "gold14A": -178
+   },
+   "Samira|Yunara": {
+    "games": 25,
+    "winA": 0.5091,
+    "gold14A": 716
+   },
+   "Sivir|Tristana": {
+    "games": 46,
+    "winA": 0.5263,
+    "gold14A": 577
+   },
+   "Sivir|Twitch": {
+    "games": 25,
+    "winA": 0.3818,
+    "gold14A": -913
+   },
+   "Sivir|Vayne": {
+    "games": 20,
+    "winA": 0.5,
+    "gold14A": 169
+   },
+   "Sivir|Xayah": {
+    "games": 28,
+    "winA": 0.5517,
+    "gold14A": -9
+   },
+   "Sivir|Yunara": {
+    "games": 47,
+    "winA": 0.4286,
+    "gold14A": -386
+   },
+   "Smolder|Tristana": {
+    "games": 25,
+    "winA": 0.5636,
+    "gold14A": -1017
+   },
+   "Smolder|Vayne": {
+    "games": 23,
+    "winA": 0.5283,
+    "gold14A": -470
+   },
+   "Smolder|Yunara": {
+    "games": 27,
+    "winA": 0.4386,
+    "gold14A": -812
+   },
+   "Tristana|Twitch": {
+    "games": 31,
+    "winA": 0.4918,
+    "gold14A": 577
+   },
+   "Tristana|Xayah": {
+    "games": 34,
+    "winA": 0.5469,
+    "gold14A": 183
+   },
+   "Tristana|Yunara": {
+    "games": 52,
+    "winA": 0.5366,
+    "gold14A": 805
+   },
+   "Tristana|Zeri": {
+    "games": 23,
+    "winA": 0.434,
+    "gold14A": 193
+   },
+   "Twitch|Vayne": {
+    "games": 21,
+    "winA": 0.5686,
+    "gold14A": 48
+   },
+   "Twitch|Yunara": {
+    "games": 41,
+    "winA": 0.6197,
+    "gold14A": 658
+   },
+   "Vayne|Yunara": {
+    "games": 36,
+    "winA": 0.4848,
+    "gold14A": -340
+   },
+   "Xayah|Yunara": {
+    "games": 37,
+    "winA": 0.5075,
+    "gold14A": 823
+   },
+   "Yunara|Zeri": {
+    "games": 27,
+    "winA": 0.4912,
+    "gold14A": -492
+   }
+  },
+  "support": {
+   "Alistar|Braum": {
+    "games": 23,
+    "winA": 0.4906,
+    "gold14A": 26
+   },
+   "Alistar|Janna": {
+    "games": 28,
+    "winA": 0.5517,
+    "gold14A": -234
+   },
+   "Alistar|Karma": {
+    "games": 27,
+    "winA": 0.5439,
+    "gold14A": -84
+   },
+   "Alistar|Lulu": {
+    "games": 33,
+    "winA": 0.4921,
+    "gold14A": -88
+   },
+   "Alistar|Milio": {
+    "games": 28,
+    "winA": 0.4828,
+    "gold14A": 153
+   },
+   "Alistar|Morgana": {
+    "games": 21,
+    "winA": 0.5098,
+    "gold14A": -368
+   },
+   "Alistar|Nami": {
+    "games": 32,
+    "winA": 0.4839,
+    "gold14A": 65
+   },
+   "Alistar|Nautilus": {
+    "games": 35,
+    "winA": 0.4308,
+    "gold14A": -392
+   },
+   "Alistar|Pyke": {
+    "games": 21,
+    "winA": 0.4118,
+    "gold14A": -776
+   },
+   "Alistar|Thresh": {
+    "games": 52,
+    "winA": 0.378,
+    "gold14A": -195
+   },
+   "Bard|Janna": {
+    "games": 33,
+    "winA": 0.3492,
+    "gold14A": 52
+   },
+   "Bard|Karma": {
+    "games": 38,
+    "winA": 0.5147,
+    "gold14A": 113
+   },
+   "Bard|Lulu": {
+    "games": 41,
+    "winA": 0.5211,
+    "gold14A": 279
+   },
+   "Bard|Milio": {
+    "games": 29,
+    "winA": 0.4746,
+    "gold14A": 358
+   },
+   "Bard|Nami": {
+    "games": 54,
+    "winA": 0.3929,
+    "gold14A": 55
+   },
+   "Bard|Seraphine": {
+    "games": 22,
+    "winA": 0.5,
+    "gold14A": -138
+   },
+   "Bard|Thresh": {
+    "games": 53,
+    "winA": 0.4337,
+    "gold14A": 9
+   },
+   "Blitzcrank|Braum": {
+    "games": 21,
+    "winA": 0.3922,
+    "gold14A": -159
+   },
+   "Blitzcrank|Janna": {
+    "games": 22,
+    "winA": 0.5,
+    "gold14A": -113
+   },
+   "Blitzcrank|Karma": {
+    "games": 43,
+    "winA": 0.6027,
+    "gold14A": -77
+   },
+   "Blitzcrank|Lulu": {
+    "games": 38,
+    "winA": 0.5147,
+    "gold14A": 157
+   },
+   "Blitzcrank|Milio": {
+    "games": 32,
+    "winA": 0.5161,
+    "gold14A": 239
+   },
+   "Blitzcrank|Nami": {
+    "games": 38,
+    "winA": 0.5,
+    "gold14A": -224
+   },
+   "Blitzcrank|Seraphine": {
+    "games": 27,
+    "winA": 0.4912,
+    "gold14A": -128
+   },
+   "Blitzcrank|Soraka": {
+    "games": 23,
+    "winA": 0.5094,
+    "gold14A": 169
+   },
+   "Blitzcrank|Thresh": {
+    "games": 43,
+    "winA": 0.5068,
+    "gold14A": -47
+   },
+   "Braum|Janna": {
+    "games": 22,
+    "winA": 0.4615,
+    "gold14A": -24
+   },
+   "Braum|Karma": {
+    "games": 27,
+    "winA": 0.5614,
+    "gold14A": -229
+   },
+   "Braum|Lulu": {
+    "games": 23,
+    "winA": 0.4717,
+    "gold14A": -81
+   },
+   "Braum|Milio": {
+    "games": 28,
+    "winA": 0.4828,
+    "gold14A": -53
+   },
+   "Braum|Morgana": {
+    "games": 21,
+    "winA": 0.4902,
+    "gold14A": -400
+   },
+   "Braum|Nami": {
+    "games": 41,
+    "winA": 0.4366,
+    "gold14A": 2
+   },
+   "Braum|Nautilus": {
+    "games": 34,
+    "winA": 0.5156,
+    "gold14A": -141
+   },
+   "Braum|Seraphine": {
+    "games": 31,
+    "winA": 0.4754,
+    "gold14A": -557
+   },
+   "Braum|Thresh": {
+    "games": 66,
+    "winA": 0.5833,
+    "gold14A": -193
+   },
+   "Janna|Karma": {
+    "games": 57,
+    "winA": 0.4713,
+    "gold14A": -114
+   },
+   "Janna|Leona": {
+    "games": 22,
+    "winA": 0.5385,
+    "gold14A": 73
+   },
+   "Janna|Lulu": {
+    "games": 92,
+    "winA": 0.4262,
+    "gold14A": -15
+   },
+   "Janna|Lux": {
+    "games": 21,
+    "winA": 0.549,
+    "gold14A": -293
+   },
+   "Janna|Milio": {
+    "games": 58,
+    "winA": 0.4659,
+    "gold14A": 10
+   },
+   "Janna|Morgana": {
+    "games": 24,
+    "winA": 0.5556,
+    "gold14A": -3
+   },
+   "Janna|Nami": {
+    "games": 89,
+    "winA": 0.4706,
+    "gold14A": -20
+   },
+   "Janna|Nautilus": {
+    "games": 33,
+    "winA": 0.5238,
+    "gold14A": -210
+   },
+   "Janna|Rakan": {
+    "games": 25,
+    "winA": 0.5455,
+    "gold14A": 287
+   },
+   "Janna|Senna": {
+    "games": 41,
+    "winA": 0.507,
+    "gold14A": -468
+   },
+   "Janna|Seraphine": {
+    "games": 46,
+    "winA": 0.4737,
+    "gold14A": -252
+   },
+   "Janna|Sona": {
+    "games": 23,
+    "winA": 0.5472,
+    "gold14A": 150
+   },
+   "Janna|Soraka": {
+    "games": 47,
+    "winA": 0.4156,
+    "gold14A": -116
+   },
+   "Janna|Thresh": {
+    "games": 58,
+    "winA": 0.4659,
+    "gold14A": -34
+   },
+   "Janna|Yuumi": {
+    "games": 33,
+    "winA": 0.5556,
+    "gold14A": 144
+   },
+   "Karma|Leona": {
+    "games": 29,
+    "winA": 0.4576,
+    "gold14A": 121
+   },
+   "Karma|Lulu": {
+    "games": 136,
+    "winA": 0.4578,
+    "gold14A": 114
+   },
+   "Karma|Lux": {
+    "games": 54,
+    "winA": 0.4405,
+    "gold14A": -285
+   },
+   "Karma|Milio": {
+    "games": 105,
+    "winA": 0.5037,
+    "gold14A": 224
+   },
+   "Karma|Morgana": {
+    "games": 55,
+    "winA": 0.4353,
+    "gold14A": -61
+   },
+   "Karma|Nami": {
+    "games": 147,
+    "winA": 0.435,
+    "gold14A": 60
+   },
+   "Karma|Nautilus": {
+    "games": 47,
+    "winA": 0.4675,
+    "gold14A": 113
+   },
+   "Karma|Pyke": {
+    "games": 30,
+    "winA": 0.55,
+    "gold14A": -356
+   },
+   "Karma|Senna": {
+    "games": 45,
+    "winA": 0.4667,
+    "gold14A": -538
+   },
+   "Karma|Seraphine": {
+    "games": 84,
+    "winA": 0.4825,
+    "gold14A": -116
+   },
+   "Karma|Sona": {
+    "games": 29,
+    "winA": 0.4746,
+    "gold14A": -145
+   },
+   "Karma|Soraka": {
+    "games": 57,
+    "winA": 0.4483,
+    "gold14A": 106
+   },
+   "Karma|Thresh": {
+    "games": 103,
+    "winA": 0.4737,
+    "gold14A": 73
+   },
+   "Karma|Yuumi": {
+    "games": 32,
+    "winA": 0.3871,
+    "gold14A": 190
+   },
+   "Karma|Zilean": {
+    "games": 27,
+    "winA": 0.4737,
+    "gold14A": -77
+   },
+   "Leona|Lulu": {
+    "games": 42,
+    "winA": 0.5417,
+    "gold14A": 269
+   },
+   "Leona|Lux": {
+    "games": 22,
+    "winA": 0.5,
+    "gold14A": -675
+   },
+   "Leona|Milio": {
+    "games": 34,
+    "winA": 0.5313,
+    "gold14A": -78
+   },
+   "Leona|Morgana": {
+    "games": 24,
+    "winA": 0.3889,
+    "gold14A": -437
+   },
+   "Leona|Nami": {
+    "games": 42,
+    "winA": 0.5139,
+    "gold14A": 192
+   },
+   "Leona|Nautilus": {
+    "games": 28,
+    "winA": 0.5172,
+    "gold14A": 2
+   },
+   "Leona|Seraphine": {
+    "games": 29,
+    "winA": 0.4915,
+    "gold14A": -317
+   },
+   "Leona|Soraka": {
+    "games": 20,
+    "winA": 0.54,
+    "gold14A": 213
+   },
+   "Leona|Thresh": {
+    "games": 44,
+    "winA": 0.4459,
+    "gold14A": -40
+   },
+   "Leona|Yuumi": {
+    "games": 28,
+    "winA": 0.569,
+    "gold14A": 137
+   },
+   "Lulu|Lux": {
+    "games": 45,
+    "winA": 0.52,
+    "gold14A": -386
+   },
+   "Lulu|Milio": {
+    "games": 164,
+    "winA": 0.4485,
+    "gold14A": 57
+   },
+   "Lulu|Morgana": {
+    "games": 30,
+    "winA": 0.5167,
+    "gold14A": -373
+   },
+   "Lulu|Nami": {
+    "games": 187,
+    "winA": 0.5069,
+    "gold14A": -22
+   },
+   "Lulu|Nautilus": {
+    "games": 74,
+    "winA": 0.5192,
+    "gold14A": -124
+   },
+   "Lulu|Pyke": {
+    "games": 40,
+    "winA": 0.5571,
+    "gold14A": -493
+   },
+   "Lulu|Rakan": {
+    "games": 32,
+    "winA": 0.4677,
+    "gold14A": 69
+   },
+   "Lulu|Rell": {
+    "games": 32,
+    "winA": 0.5,
+    "gold14A": -15
+   },
+   "Lulu|Renata": {
+    "games": 21,
+    "winA": 0.4118,
+    "gold14A": -273
+   },
+   "Lulu|Senna": {
+    "games": 57,
+    "winA": 0.4828,
+    "gold14A": -502
+   },
+   "Lulu|Seraphine": {
+    "games": 90,
+    "winA": 0.4917,
+    "gold14A": -341
+   },
+   "Lulu|Sona": {
+    "games": 61,
+    "winA": 0.4835,
+    "gold14A": -51
+   },
+   "Lulu|Soraka": {
+    "games": 86,
+    "winA": 0.5086,
+    "gold14A": 14
+   },
+   "Lulu|Swain": {
+    "games": 24,
+    "winA": 0.5741,
+    "gold14A": -218
+   },
+   "Lulu|TahmKench": {
+    "games": 22,
+    "winA": 0.4231,
+    "gold14A": -309
+   },
+   "Lulu|Thresh": {
+    "games": 152,
+    "winA": 0.4231,
+    "gold14A": -148
+   },
+   "Lulu|Yuumi": {
+    "games": 65,
+    "winA": 0.5263,
+    "gold14A": 168
+   },
+   "Lulu|Zilean": {
+    "games": 39,
+    "winA": 0.4783,
+    "gold14A": -75
+   },
+   "Lux|Milio": {
+    "games": 37,
+    "winA": 0.5672,
+    "gold14A": 531
+   },
+   "Lux|Nami": {
+    "games": 62,
+    "winA": 0.4674,
+    "gold14A": 261
+   },
+   "Lux|Nautilus": {
+    "games": 27,
+    "winA": 0.5439,
+    "gold14A": 181
+   },
+   "Lux|Senna": {
+    "games": 24,
+    "winA": 0.5185,
+    "gold14A": -39
+   },
+   "Lux|Seraphine": {
+    "games": 41,
+    "winA": 0.4648,
+    "gold14A": 158
+   },
+   "Lux|Soraka": {
+    "games": 29,
+    "winA": 0.4407,
+    "gold14A": 287
+   },
+   "Lux|Thresh": {
+    "games": 53,
+    "winA": 0.5301,
+    "gold14A": 112
+   },
+   "Maokai|Thresh": {
+    "games": 24,
+    "winA": 0.4444,
+    "gold14A": -16
+   },
+   "Milio|Morgana": {
+    "games": 43,
+    "winA": 0.4932,
+    "gold14A": -391
+   },
+   "Milio|Nami": {
+    "games": 150,
+    "winA": 0.4778,
+    "gold14A": -152
+   },
+   "Milio|Nautilus": {
+    "games": 52,
+    "winA": 0.5732,
+    "gold14A": 21
+   },
+   "Milio|Pyke": {
+    "games": 25,
+    "winA": 0.5091,
+    "gold14A": -575
+   },
+   "Milio|Rakan": {
+    "games": 31,
+    "winA": 0.4918,
+    "gold14A": -165
+   },
+   "Milio|Senna": {
+    "games": 49,
+    "winA": 0.557,
+    "gold14A": -479
+   },
+   "Milio|Seraphine": {
+    "games": 80,
+    "winA": 0.5727,
+    "gold14A": -351
+   },
+   "Milio|Sona": {
+    "games": 46,
+    "winA": 0.3947,
+    "gold14A": -83
+   },
+   "Milio|Soraka": {
+    "games": 56,
+    "winA": 0.5116,
+    "gold14A": -127
+   },
+   "Milio|Swain": {
+    "games": 26,
+    "winA": 0.5536,
+    "gold14A": -483
+   },
+   "Milio|Thresh": {
+    "games": 100,
+    "winA": 0.5,
+    "gold14A": -98
+   },
+   "Milio|Yuumi": {
+    "games": 46,
+    "winA": 0.4868,
+    "gold14A": 8
+   },
+   "Milio|Zilean": {
+    "games": 27,
+    "winA": 0.4737,
+    "gold14A": -283
+   },
+   "Milio|Zyra": {
+    "games": 20,
+    "winA": 0.48,
+    "gold14A": -568
+   },
+   "Morgana|Nami": {
+    "games": 41,
+    "winA": 0.5775,
+    "gold14A": 289
+   },
+   "Morgana|Nautilus": {
+    "games": 31,
+    "winA": 0.541,
+    "gold14A": 136
+   },
+   "Morgana|Senna": {
+    "games": 23,
+    "winA": 0.4717,
+    "gold14A": -95
+   },
+   "Morgana|Seraphine": {
+    "games": 29,
+    "winA": 0.4915,
+    "gold14A": 7
+   },
+   "Morgana|Thresh": {
+    "games": 64,
+    "winA": 0.5106,
+    "gold14A": 64
+   },
+   "Nami|Nautilus": {
+    "games": 94,
+    "winA": 0.4919,
+    "gold14A": -191
+   },
+   "Nami|Pyke": {
+    "games": 32,
+    "winA": 0.5484,
+    "gold14A": -254
+   },
+   "Nami|Rakan": {
+    "games": 41,
+    "winA": 0.5211,
+    "gold14A": 182
+   },
+   "Nami|Rell": {
+    "games": 24,
+    "winA": 0.5,
+    "gold14A": -54
+   },
+   "Nami|Senna": {
+    "games": 56,
+    "winA": 0.5233,
+    "gold14A": -560
+   },
+   "Nami|Seraphine": {
+    "games": 92,
+    "winA": 0.4754,
+    "gold14A": -264
+   },
+   "Nami|Sona": {
+    "games": 69,
+    "winA": 0.4747,
+    "gold14A": 44
+   },
+   "Nami|Soraka": {
+    "games": 82,
+    "winA": 0.4732,
+    "gold14A": -14
+   },
+   "Nami|Swain": {
+    "games": 27,
+    "winA": 0.4912,
+    "gold14A": -250
+   },
+   "Nami|Thresh": {
+    "games": 134,
+    "winA": 0.4451,
+    "gold14A": -58
+   },
+   "Nami|Velkoz": {
+    "games": 27,
+    "winA": 0.4912,
+    "gold14A": -195
+   },
+   "Nami|Yuumi": {
+    "games": 55,
+    "winA": 0.5647,
+    "gold14A": 32
+   },
+   "Nami|Zilean": {
+    "games": 40,
+    "winA": 0.4571,
+    "gold14A": -80
+   },
+   "Nami|Zyra": {
+    "games": 28,
+    "winA": 0.4483,
+    "gold14A": -265
+   },
+   "Nautilus|Pyke": {
+    "games": 21,
+    "winA": 0.5882,
+    "gold14A": -282
+   },
+   "Nautilus|Senna": {
+    "games": 25,
+    "winA": 0.4727,
+    "gold14A": -271
+   },
+   "Nautilus|Seraphine": {
+    "games": 39,
+    "winA": 0.4348,
+    "gold14A": -280
+   },
+   "Nautilus|Sona": {
+    "games": 21,
+    "winA": 0.5294,
+    "gold14A": 9
+   },
+   "Nautilus|Soraka": {
+    "games": 33,
+    "winA": 0.4603,
+    "gold14A": 86
+   },
+   "Nautilus|Thresh": {
+    "games": 65,
+    "winA": 0.4632,
+    "gold14A": -163
+   },
+   "Nautilus|Yuumi": {
+    "games": 29,
+    "winA": 0.5424,
+    "gold14A": 499
+   },
+   "Pyke|Senna": {
+    "games": 21,
+    "winA": 0.5098,
+    "gold14A": 258
+   },
+   "Pyke|Seraphine": {
+    "games": 22,
+    "winA": 0.5385,
+    "gold14A": 252
+   },
+   "Pyke|Soraka": {
+    "games": 23,
+    "winA": 0.5472,
+    "gold14A": 819
+   },
+   "Pyke|Thresh": {
+    "games": 47,
+    "winA": 0.5065,
+    "gold14A": 502
+   },
+   "Rakan|Thresh": {
+    "games": 35,
+    "winA": 0.4308,
+    "gold14A": -205
+   },
+   "Rell|Thresh": {
+    "games": 28,
+    "winA": 0.5,
+    "gold14A": -112
+   },
+   "Senna|Seraphine": {
+    "games": 33,
+    "winA": 0.5079,
+    "gold14A": 76
+   },
+   "Senna|Soraka": {
+    "games": 26,
+    "winA": 0.5357,
+    "gold14A": 677
+   },
+   "Senna|Thresh": {
+    "games": 43,
+    "winA": 0.4795,
+    "gold14A": 253
+   },
+   "Seraphine|Sona": {
+    "games": 37,
+    "winA": 0.4328,
+    "gold14A": 545
+   },
+   "Seraphine|Soraka": {
+    "games": 38,
+    "winA": 0.4706,
+    "gold14A": 404
+   },
+   "Seraphine|Thresh": {
+    "games": 75,
+    "winA": 0.3905,
+    "gold14A": 145
+   },
+   "Seraphine|Yuumi": {
+    "games": 31,
+    "winA": 0.4754,
+    "gold14A": 506
+   },
+   "Seraphine|Zilean": {
+    "games": 26,
+    "winA": 0.4821,
+    "gold14A": 301
+   },
+   "Sona|Soraka": {
+    "games": 32,
+    "winA": 0.5323,
+    "gold14A": 56
+   },
+   "Sona|Thresh": {
+    "games": 36,
+    "winA": 0.4394,
+    "gold14A": -229
+   },
+   "Sona|Yuumi": {
+    "games": 26,
+    "winA": 0.5,
+    "gold14A": 56
+   },
+   "Soraka|Thresh": {
+    "games": 58,
+    "winA": 0.5,
+    "gold14A": -250
+   },
+   "Soraka|Yuumi": {
+    "games": 28,
+    "winA": 0.4138,
+    "gold14A": -47
+   },
+   "Swain|Thresh": {
+    "games": 31,
+    "winA": 0.5574,
+    "gold14A": 440
+   },
+   "Thresh|Yuumi": {
+    "games": 37,
+    "winA": 0.5522,
+    "gold14A": 179
+   },
+   "Thresh|Zilean": {
+    "games": 33,
+    "winA": 0.5079,
+    "gold14A": 72
+   },
+   "Thresh|Zyra": {
+    "games": 20,
+    "winA": 0.52,
+    "gold14A": -479
+   }
+  }
+ }
+}

@@ -3,6 +3,7 @@ import {
   buildShareText, summarizeTeam, TOWERS_TO_WIN,
   type DecisionPrompt, type Match, type MatchEvent, type MatchSummary,
 } from "../../shared/engine";
+import { getMatchup, laneEdge } from "../../shared/matchups";
 import { champName } from "../../shared/meta";
 import { LANES, LANE_LABEL, type Attributes, type DailyChallenge, type Lane, type Team } from "../../shared/types";
 import type { LeaderboardEntry } from "./api";
@@ -29,7 +30,7 @@ function champIcon(id: string, size = "md") {
   return h("img", { class: `icon icon-${size}`, src: `/champions/${id}.png`, alt: champName(id), draggable: false });
 }
 
-function champCard(id: string, opts: { selected?: boolean; enemy?: boolean; onClick?: () => void } = {}) {
+function champCard(id: string, opts: { selected?: boolean; enemy?: boolean; onClick?: () => void; extra?: Node } = {}) {
   const dmg = getChampion(id).dmg;
   return h(opts.onClick ? "button" : "div", {
     class: `card ${opts.enemy ? "card-enemy" : ""} ${opts.selected ? "card-selected" : ""}`,
@@ -41,7 +42,26 @@ function champCard(id: string, opts: { selected?: boolean; enemy?: boolean; onCl
       h("span", { class: `chip chip-${dmg.toLowerCase()}` }, dmg === "MIX" ? "Misto" : dmg),
       traits(id).map((t) => h("span", { class: "chip" }, t)),
     ),
+    opts.extra,
   );
+}
+
+/** Como o campeão se sai contra o adversário direto (dados reais quando existem). */
+function matchupBadge(lane: Lane, id: string, opponent: string) {
+  const edge = laneEdge(lane, id, opponent);
+  const data = getMatchup(lane, id, opponent);
+  const [cls, label] = edge > 0.6 ? ["good", "Rota favorável"]
+    : edge < -0.6 ? ["bad", "Rota difícil"]
+    : ["even", "Rota equilibrada"];
+  // A vantagem de rota vem do ouro aos 14 min; a vitória na partida é informação extra
+  // (ex.: Malphite perde a rota para Aatrox, mas escala e vence metade dos jogos).
+  const lines = !data
+    ? ["estimado pelos atributos"]
+    : [
+        ...(data.gold14 !== null ? [`${data.gold14 > 0 ? "+" : ""}${data.gold14} de ouro aos 14'`] : []),
+        `${Math.round(data.winrate * 100)}% de vitórias · ${data.games} jogos`,
+      ];
+  return h("div", { class: `matchup matchup-${cls}` }, h("strong", {}, label), lines.map((l) => h("span", {}, l)));
 }
 
 // ------------------------------------------------------------ Draft
@@ -107,6 +127,7 @@ export function draftView(
           daily.options[lane].map((id) => champCard(id, {
             selected: picks[lane] === id,
             onClick: () => { picks[lane] = id; render(); },
+            extra: matchupBadge(lane, id, daily.enemy[lane]),
           })),
         )),
       ),

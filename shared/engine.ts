@@ -9,6 +9,7 @@
  * objetivos e torres. Nos DECISION_TURNS o jogador escolhe a jogada.
  */
 import { getChampion } from "./champions";
+import { laneEdge } from "./matchups";
 import { champName } from "./meta";
 import { Rng } from "./rng";
 import {
@@ -224,10 +225,15 @@ export class Match {
   readonly state: MatchState;
   private readonly rng: Rng;
   private readonly profiles: Record<Side, Profile>;
+  /** Vantagem do aliado em cada confronto de rota (dados reais + atributos). */
+  private readonly laneEdges: Record<Lane, number>;
 
   constructor(readonly allyTeam: Team, readonly enemyTeam: Team, seedKey: string) {
     this.rng = new Rng(seedKey);
     this.profiles = { ally: buildProfile(allyTeam), enemy: buildProfile(enemyTeam) };
+    this.laneEdges = Object.fromEntries(
+      LANES.map((l) => [l, laneEdge(l, allyTeam[l], enemyTeam[l])]),
+    ) as Record<Lane, number>;
     const side = (): SideState => ({ gold: 2500, kills: 0, towers: 0, dragons: 0, barons: 0, baronTurns: 0 });
     this.state = {
       turn: 0,
@@ -499,15 +505,6 @@ export class Match {
 
   // ---------------------------------------------------------- Fase de rotas
 
-  private laneScore(side: Side, members: Lane[]): number {
-    const champs = this.profiles[side].champs;
-    const total = members.reduce((sum, l) => {
-      const a = champs[l].attrs;
-      return sum + a.early + a.burst * 0.35 + a.poke * 0.35 + a.cc * 0.2 + a.mobility * 0.1;
-    }, 0);
-    return total / members.length;
-  }
-
   private laneTurn() {
     const lanes: { key: BigLane; members: Lane[]; label: string }[] = [
       { key: "top", members: ["top"], label: "no topo" },
@@ -515,8 +512,8 @@ export class Match {
       { key: "bot", members: ["adc", "support"], label: "no bot" },
     ];
     for (const lane of lanes) {
-      const diff = this.laneScore("ally", lane.members) - this.laneScore("enemy", lane.members)
-        + this.rng.range(-1.5, 1.5);
+      const edge = lane.members.reduce((sum, l) => sum + this.laneEdges[l], 0) / lane.members.length;
+      const diff = edge + this.rng.range(-1.5, 1.5);
       const gold = Math.round(diff * 80);
       this.state.laneLead[lane.key] += gold;
       this.addGold(gold > 0 ? "ally" : "enemy", Math.abs(gold));
@@ -538,7 +535,9 @@ export class Match {
   private jungleTurn() {
     const jA = this.profiles.ally.champs.jungle.attrs;
     const jE = this.profiles.enemy.champs.jungle.attrs;
-    const actor: Side = this.rng.chance(jA.early / (jA.early + jE.early)) ? "ally" : "enemy";
+    // Quem vence o confronto de selva (dados de ouro/vitória) ganha a iniciativa com mais frequência.
+    const initiative = clamp(jA.early / (jA.early + jE.early) + this.laneEdges.jungle * 0.06, 0.15, 0.85);
+    const actor: Side = this.rng.chance(initiative) ? "ally" : "enemy";
     if (!this.rng.chance(0.65)) return; // o caçador ficou farmando
 
     const target = this.rng.pick(["top", "mid", "adc"] as const);

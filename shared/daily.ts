@@ -53,14 +53,17 @@ function draw(date: string, attempt: number): DailyChallenge {
  * ou em que quase tudo vence — a escolha do draft precisa importar.
  */
 export function generateDaily(date: string): DailyChallenge {
-  let fallback: DailyChallenge | null = null;
+  // Se nenhum sorteio passar no filtro, usa o que chegou mais perto dele.
+  let closest: { daily: DailyChallenge; distance: number } | null = null;
   for (let attempt = 0; attempt < 20; attempt++) {
     const daily = draw(date, attempt);
-    fallback ??= daily;
-    const rates = allCombos(daily.options).map((t) => estimateWinRate(t, daily.enemy, 20, date));
+    const rates = allCombos(daily.options).map((t) => estimateWinRate(t, daily.enemy, 40, date));
     const best = Math.max(...rates);
     const winning = rates.filter((r) => r >= 0.5).length / rates.length;
     if (best >= 0.65 && winning >= 0.2 && winning <= 0.6) return daily;
+
+    const distance = Math.max(0, 0.65 - best) + Math.max(0, 0.2 - winning, winning - 0.6);
+    if (!closest || distance < closest.distance) closest = { daily, distance };
   }
-  return fallback!;
+  return closest!.daily;
 }
