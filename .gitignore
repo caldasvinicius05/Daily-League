@@ -4,3 +4,4 @@ dist/
 data/results.json
 shared/generated/
 client/public/champions/
+data/riot/

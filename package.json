@@ -11,6 +11,8 @@
     "start": "tsx server/index.ts",
     "balance": "tsx scripts/balance.ts",
     "test": "tsx scripts/check-replay.ts",
+    "riot:collect": "tsx scripts/riot/collect.ts",
+    "riot:build": "tsx scripts/riot/build-matchups.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
