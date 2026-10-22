@@ -112,6 +112,10 @@ button.card:hover { border-color: var(--ally); transform: translateY(-1px); }
 .event-ally { border-left-color: var(--ally); background: color-mix(in srgb, var(--ally) 8%, transparent); }
 .event-enemy { border-left-color: var(--enemy); background: color-mix(in srgb, var(--enemy) 8%, transparent); }
 .minute { color: var(--muted); font-variant-numeric: tabular-nums; margin-right: 8px; font-size: 12px; }
+.lineup { margin-top: 2px; font-size: 12px; color: var(--muted); }
+.lineup .ally { color: color-mix(in srgb, var(--ally) 70%, var(--text)); }
+.lineup .enemy { color: color-mix(in srgb, var(--enemy) 70%, var(--text)); }
+.lineup .dead { text-decoration: line-through; opacity: .75; }
 @keyframes fade-in { from { opacity: 0; transform: translateY(4px); } }
 
 .decision { background: var(--panel); border: 1px solid var(--gold); border-radius: var(--radius); padding: 14px; }

@@ -1,7 +1,10 @@
 // Verifica a consistência do estado individual dos campeões ao longo de muitas partidas.
 import { allCombos, generateDaily, todayKey } from "../shared/daily";
-import { Match, matchSeed, playToEnd, TOWERS_TO_WIN, type DecisionPrompt, type Side } from "../shared/engine";
+import { Match, matchSeed, playToEnd, TOWERS_TO_WIN, type DecisionPrompt, type EventKind, type Side } from "../shared/engine";
 import { LANES } from "../shared/types";
+
+// Lutas, abates e torres sempre dizem quem estava lá.
+const NEEDS_PARTICIPANTS = new Set<EventKind>(["lane-kill", "gank", "gank-fail", "gank-escape", "skirmish", "pick", "tower", "teamfight", "dragon", "baron", "action"]);
 
 const daily = generateDaily(todayKey(new Date("2026-01-01T15:00:00Z")));
 const errors: string[] = [];
@@ -28,6 +31,7 @@ for (const team of allCombos(daily.options)) {
     for (const e of s.events) {
       events++;
       if (e.allies.length || e.enemies.length) withParticipants++;
+      else if (NEEDS_PARTICIPANTS.has(e.kind) && !e.text.includes("farmou com segurança")) errors.push(`evento sem participantes (${e.kind}): ${e.text}`);
       for (const v of e.victims) {
         const inEvent = (v.side === "ally" ? e.allies : e.enemies).includes(v.lane);
         if (!inEvent && (e.allies.length || e.enemies.length)) errors.push(`vítima fora do evento: ${e.text}`);
