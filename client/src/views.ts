@@ -3,6 +3,7 @@ import {
   buildShareText, formatClock, summarizeTeam, TOWERS_TO_WIN,
   type DecisionPrompt, type Match, type MatchEvent, type MatchSummary,
 } from "../../shared/engine";
+import { ZONE_LABEL } from "../../shared/map";
 import { getMatchup, laneEdge } from "../../shared/matchups";
 import { champName } from "../../shared/meta";
 import { LANES, LANE_LABEL, type Attributes, type DailyChallenge, type Lane, type Team } from "../../shared/types";
@@ -180,9 +181,29 @@ export function matchView(match: Match, onFinish: () => void): HTMLElement {
     );
   };
 
+  /** "📍 rio de cima · 3x4 — A, B, C vs D, E, F, G", com quem morreu riscado. */
+  const lineup = (e: MatchEvent) => {
+    if (!e.allies.length && !e.enemies.length) return null;
+    const side = (lanes: Lane[], team: Team, cls: "ally" | "enemy") => h("span", { class: cls },
+      lanes.flatMap((l, i) => {
+        const dead = e.victims.some((v) => v.side === cls && v.lane === l);
+        const name = h("span", { class: dead ? "dead" : "" }, `${dead ? "💀 " : ""}${champName(team[l])}`);
+        return i ? [", ", name] : [name];
+      }));
+    const both = e.allies.length && e.enemies.length;
+    return h("div", { class: "lineup" },
+      e.zone ? `📍 ${ZONE_LABEL[e.zone]} · ` : "",
+      both ? `${e.allies.length}x${e.enemies.length} — ` : "",
+      e.allies.length ? side(e.allies, match.allyTeam, "ally") : "",
+      both ? " vs " : "",
+      e.enemies.length ? side(e.enemies, match.enemyTeam, "enemy") : "",
+    );
+  };
+
   const append = (events: MatchEvent[]) => {
     for (const e of events) {
-      log.append(h("li", { class: `event event-${e.side}` }, h("span", { class: "minute" }, `${e.minute}'`), e.text));
+      log.append(h("li", { class: `event event-${e.side}` },
+        h("span", { class: "minute" }, formatClock(e.time)), e.text, lineup(e)));
     }
     log.scrollTop = log.scrollHeight;
   };
