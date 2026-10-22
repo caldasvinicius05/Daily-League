@@ -1,5 +1,8 @@
 export type Lane = "top" | "jungle" | "mid" | "adc" | "support";
 
+/** "ally" = time do jogador (lado azul); "enemy" = time inimigo (lado vermelho). */
+export type Side = "ally" | "enemy";
+
 export const LANES: Lane[] = ["top", "jungle", "mid", "adc", "support"];
 
 export const LANE_LABEL: Record<Lane, string> = {
