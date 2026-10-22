@@ -48,6 +48,11 @@ function draw(date: string, attempt: number): DailyChallenge {
   return { date, enemy, options };
 }
 
+// Fração das 32 combinações que precisa vencer (>= 50%). A faixa é mais estreita
+// que a do balance:check (20%–65%) porque a estimativa do filtro tem ruído.
+const MIN_WINNING = 0.25;
+const MAX_WINNING = 0.55;
+
 /**
  * Sorteia o desafio do dia. Rejeita sorteios em que nenhum time vence com frequência
  * ou em que quase tudo vence — a escolha do draft precisa importar.
@@ -60,9 +65,9 @@ export function generateDaily(date: string): DailyChallenge {
     const rates = allCombos(daily.options).map((t) => estimateWinRate(t, daily.enemy, 40, date));
     const best = Math.max(...rates);
     const winning = rates.filter((r) => r >= 0.5).length / rates.length;
-    if (best >= 0.65 && winning >= 0.2 && winning <= 0.6) return daily;
+    if (best >= 0.65 && winning >= MIN_WINNING && winning <= MAX_WINNING) return daily;
 
-    const distance = Math.max(0, 0.65 - best) + Math.max(0, 0.2 - winning, winning - 0.6);
+    const distance = Math.max(0, 0.65 - best) + Math.max(0, MIN_WINNING - winning, winning - MAX_WINNING);
     if (!closest || distance < closest.distance) closest = { daily, distance };
   }
   return closest!.daily;

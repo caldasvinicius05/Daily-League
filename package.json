@@ -11,7 +11,7 @@
     "start": "tsx server/index.ts",
     "balance": "tsx scripts/balance.ts",
     "balance:check": "tsx scripts/balance.ts 20 --from 2026-01-01 --check",
-    "test": "tsx scripts/check-replay.ts",
+    "test": "tsx scripts/check-replay.ts && tsx scripts/check-state.ts",
     "riot:collect": "tsx scripts/riot/collect.ts",
     "riot:build": "tsx scripts/riot/build-matchups.ts",
     "typecheck": "tsc --noEmit"

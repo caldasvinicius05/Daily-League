@@ -5,25 +5,35 @@
  * na mesma ordem. Mesmo time + mesmas decisões => mesma partida (o servidor usa isso
  * para revalidar o resultado enviado pelo cliente).
  *
- * Cada turno = 2 minutos. Turnos 1–5 são a fase de rotas; depois vêm lutas,
- * objetivos e torres. Nos DECISION_TURNS o jogador escolhe a jogada.
+ * O relógio anda em ticks de 30 s (advance()). A cada TICKS_PER_TURN ticks (2 min)
+ * roda um turno: turnos 1–5 são a fase de rotas; depois vêm lutas, objetivos e torres.
+ * Nos DECISION_TURNS o jogador escolhe a jogada.
+ *
+ * Cada campeão tem estado próprio (vivo/morto, região do mapa, abates, ouro), cada
+ * time tem suas 11 torres, e cada evento registra onde aconteceu e quem participou.
  */
 import { getChampion } from "./champions";
+import {
+  baseZone, jungleZone, LANE_ROUTE, TOWERS,
+  type Route, type TowerDef, type Zone,
+} from "./map";
 import { laneEdge } from "./matchups";
 import { champName } from "./meta";
 import { Rng } from "./rng";
 import {
   ATTRIBUTE_KEYS, LANES, LANE_LABEL,
-  type Attributes, type ChampionDef, type DailyChallenge, type Lane, type Team,
+  type Attributes, type ChampionDef, type DailyChallenge, type Lane, type Side, type Team,
 } from "./types";
 
-export type Side = "ally" | "enemy";
+export type { Side } from "./types";
 export type ActionId = "teamfight" | "dragon" | "baron" | "dive" | "siege" | "split" | "farm" | "invade";
 export type LaneOutcome = "win" | "loss" | "even";
 
-export const MINUTES_PER_TURN = 2;
+export const TICK_SECONDS = 30;
+export const TICKS_PER_TURN = 4;
+export const TURN_SECONDS = TICK_SECONDS * TICKS_PER_TURN; // 2 min
 export const MAX_TURNS = 22;
-export const TOWERS_TO_WIN = 11;
+export const TOWERS_TO_WIN = TOWERS.length; // 11: as 9 de rota + as 2 do Nexus
 export const DECISION_TURNS = [4, 8, 12, 16, 20];
 const LANE_PHASE_END = 5;
 const FIRST_DRAGON_TURN = 3;
@@ -32,10 +42,30 @@ const FIRST_BARON_TURN = 10;
 const BARON_RESPAWN = 3;
 const BARON_DURATION = 2;
 const PASSIVE_GOLD = 1900;
+const STARTING_GOLD = 500;
+const KILL_GOLD = 300;
+const TOWER_GOLD = 600;
+
+export type EventKind =
+  | "lane-kill" | "gank" | "gank-fail" | "gank-escape"
+  | "skirmish" | "pick" | "tower" | "teamfight"
+  | "dragon-spawn" | "dragon" | "baron-spawn" | "baron"
+  | "decision" | "action" | "phase" | "end";
+
+export interface ChampionRef {
+  side: Side;
+  lane: Lane;
+}
 
 export interface MatchEvent {
+  time: number; // segundos de jogo
   minute: number;
   side: Side | "neutral";
+  kind: EventKind;
+  zone: Zone | null;
+  allies: Lane[]; // campeões aliados envolvidos (pela posição)
+  enemies: Lane[]; // campeões inimigos envolvidos
+  victims: ChampionRef[];
   text: string;
 }
 
@@ -61,8 +91,21 @@ export interface DecisionRecord {
   chance: number;
 }
 
-export interface SideState {
+export interface ChampionState {
+  id: string;
+  side: Side;
+  lane: Lane;
+  zone: Zone;
+  alive: boolean;
+  respawnAt: number; // segundo de jogo em que volta (se morto)
+  kills: number;
+  deaths: number;
+  assists: number;
   gold: number;
+}
+
+export interface SideState {
+  gold: number; // soma do ouro dos 5 campeões
   kills: number;
   towers: number; // torres inimigas destruídas por este lado
   dragons: number;
@@ -70,13 +113,17 @@ export interface SideState {
   baronTurns: number; // turnos restantes do buff do Barão
 }
 
-type BigLane = "top" | "mid" | "bot";
+type BigLane = Route;
 
 export interface MatchState {
+  tick: number;
+  time: number; // segundos de jogo
   turn: number;
   minute: number;
   ally: SideState;
   enemy: SideState;
+  champions: Record<Side, Record<Lane, ChampionState>>;
+  towersStanding: Record<Side, string[]>; // ids das torres de pé, por dono
   laneLead: Record<BigLane, number>; // ouro de vantagem da rota (positivo = aliado)
   jungleScore: number; // ganks bem-sucedidos (positivo = aliado)
   laneResults: Record<Lane, LaneOutcome> | null;
@@ -155,6 +202,18 @@ const GANK_PLACE = { top: "o topo", mid: "o meio", adc: "o bot" } as const;
 
 const formatGold = (gold: number) => `${gold >= 0 ? "+" : ""}${(gold / 1000).toFixed(1)}k`;
 
+/** Tempo de jogo como "mm:ss". */
+export function formatClock(seconds: number): string {
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return `${m}:${String(s).padStart(2, "0")}`;
+}
+
+/** Tempo de morte: ~10 s no início, chegando a 60 s no fim de jogo. */
+function respawnSeconds(minute: number): number {
+  return Math.round(clamp(6 + minute * 1.5, 8, 60));
+}
+
 interface Profile {
   champs: Record<Lane, ChampionDef>;
   sum: Attributes;
@@ -209,6 +268,7 @@ export function summarizeTeam(ids: string[]) {
 
 const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
 const other = (side: Side): Side => (side === "ally" ? "enemy" : "ally");
+const unique = <T>(items: T[]) => [...new Set(items)];
 
 /** Probabilidade de A vencer B; "sharpness" maior = vantagens pesam mais. */
 export function winChance(a: number, b: number, sharpness = 4): number {
@@ -221,12 +281,26 @@ export function matchSeed(date: string, team: Team): string {
   return `${date}|${LANES.map((l) => team[l]).join(",")}`;
 }
 
+/** Evento em construção: onde é e quem está lá. As mortes entram conforme acontecem. */
+interface EventDraft {
+  zone: Zone | null;
+  allies: Lane[];
+  enemies: Lane[];
+  victims: ChampionRef[];
+}
+
+interface KillOptions {
+  victim?: Lane; // vítima preferida (se estiver viva)
+  killer?: Lane; // quem leva o abate
+}
+
 export class Match {
   readonly state: MatchState;
   private readonly rng: Rng;
   private readonly profiles: Record<Side, Profile>;
   /** Vantagem do aliado em cada confronto de rota (dados reais + atributos). */
   private readonly laneEdges: Record<Lane, number>;
+  private draft: EventDraft | null = null;
 
   constructor(readonly allyTeam: Team, readonly enemyTeam: Team, seedKey: string) {
     this.rng = new Rng(seedKey);
@@ -234,12 +308,24 @@ export class Match {
     this.laneEdges = Object.fromEntries(
       LANES.map((l) => [l, laneEdge(l, allyTeam[l], enemyTeam[l])]),
     ) as Record<Lane, number>;
-    const side = (): SideState => ({ gold: 2500, kills: 0, towers: 0, dragons: 0, barons: 0, baronTurns: 0 });
+
+    const sideState = (): SideState => ({
+      gold: STARTING_GOLD * LANES.length, kills: 0, towers: 0, dragons: 0, barons: 0, baronTurns: 0,
+    });
+    const champions = (side: Side, team: Team) => Object.fromEntries(LANES.map((lane) => [lane, {
+      id: team[lane], side, lane, zone: baseZone(side), alive: true, respawnAt: 0,
+      kills: 0, deaths: 0, assists: 0, gold: STARTING_GOLD,
+    }])) as Record<Lane, ChampionState>;
+
     this.state = {
+      tick: 0,
+      time: 0,
       turn: 0,
       minute: 0,
-      ally: side(),
-      enemy: side(),
+      ally: sideState(),
+      enemy: sideState(),
+      champions: { ally: champions("ally", allyTeam), enemy: champions("enemy", enemyTeam) },
+      towersStanding: { ally: TOWERS.map((t) => t.id), enemy: TOWERS.map((t) => t.id) },
       laneLead: { top: 0, mid: 0, bot: 0 },
       jungleScore: 0,
       laneResults: null,
@@ -256,25 +342,20 @@ export class Match {
 
   // ------------------------------------------------------------------ API
 
-  /** Avança um turno. Em turnos de decisão, preenche state.pending e espera decide(). */
+  /**
+   * Avança 30 s de jogo. A cada 2 min roda um turno; em turnos de decisão,
+   * preenche state.pending e espera decide().
+   */
   advance(): MatchEvent[] {
     const s = this.state;
     if (s.winner || s.pending) return [];
     const before = s.events.length;
 
-    s.turn++;
-    s.minute = s.turn * MINUTES_PER_TURN;
-    s.ally.gold += PASSIVE_GOLD;
-    s.enemy.gold += PASSIVE_GOLD;
-    this.spawnObjectives();
-
-    if (DECISION_TURNS.includes(s.turn)) {
-      s.pending = this.buildPrompt();
-    } else {
-      if (s.turn <= LANE_PHASE_END) this.laneTurn();
-      else this.midTurn();
-      this.endTurn();
-    }
+    s.tick++;
+    s.time = s.tick * TICK_SECONDS;
+    s.minute = Math.floor(s.time / 60);
+    this.updateChampions();
+    if (s.tick % TICKS_PER_TURN === 0) this.runTurn();
     return s.events.slice(before);
   }
 
@@ -308,6 +389,49 @@ export class Match {
       lanes: s.laneResults ?? this.computeLaneResults(),
       decisions: s.decisions.map((d) => ({ id: d.id, success: d.success })),
     };
+  }
+
+  // -------------------------------------------------------------- Relógio
+
+  private runTurn() {
+    const s = this.state;
+    s.turn++;
+    this.addGold("ally", PASSIVE_GOLD);
+    this.addGold("enemy", PASSIVE_GOLD);
+    this.spawnObjectives();
+
+    if (DECISION_TURNS.includes(s.turn)) {
+      s.pending = this.buildPrompt();
+    } else {
+      if (s.turn <= LANE_PHASE_END) this.laneTurn();
+      else this.midTurn();
+      this.endTurn();
+    }
+  }
+
+  /** Renascimentos e posição padrão de cada campeão neste tick. */
+  private updateChampions() {
+    const s = this.state;
+    for (const side of ["ally", "enemy"] as Side[]) {
+      for (const lane of LANES) {
+        const c = s.champions[side][lane];
+        if (!c.alive && s.time >= c.respawnAt) c.alive = true;
+        c.zone = c.alive ? this.defaultZone(side, lane) : baseZone(side);
+      }
+    }
+  }
+
+  private defaultZone(side: Side, lane: Lane): Zone {
+    const s = this.state;
+    // O caçador alterna entre os dois lados da própria selva.
+    if (lane === "jungle") return jungleZone(side, s.tick % 2 === 0 ? "top" : "bot");
+    if (s.time <= LANE_PHASE_END * TURN_SECONDS) return LANE_ROUTE[lane]!;
+    // Depois da fase de rotas: o topo segura a rota lateral, o resto se agrupa
+    // perto do objetivo vivo (ou no meio).
+    if (lane === "top") return "top";
+    if (s.dragonUp) return "river-bot";
+    if (s.baronUp) return "river-top";
+    return "mid";
   }
 
   // --------------------------------------------------------------- Poder
@@ -402,10 +526,50 @@ export class Match {
     }
   }
 
-  // ------------------------------------------------------------- Helpers
+  // ------------------------------------------------------------- Eventos
 
-  private log(side: Side | "neutral", text: string) {
-    this.state.events.push({ minute: this.state.minute, side, text });
+  private champ(side: Side, lane: Lane): ChampionState {
+    return this.state.champions[side][lane];
+  }
+
+  private isAlive(side: Side, lane: Lane): boolean {
+    return this.champ(side, lane).alive;
+  }
+
+  /** Abre um evento: só participa quem está vivo, e os participantes vão para o local. */
+  private event(zone: Zone | null, allies: Lane[], enemies: Lane[]) {
+    const draft: EventDraft = {
+      zone,
+      allies: unique(allies).filter((l) => this.isAlive("ally", l)),
+      enemies: unique(enemies).filter((l) => this.isAlive("enemy", l)),
+      victims: [],
+    };
+    if (zone) {
+      for (const l of draft.allies) this.champ("ally", l).zone = zone;
+      for (const l of draft.enemies) this.champ("enemy", l).zone = zone;
+    }
+    this.draft = draft;
+  }
+
+  private participants(draft: EventDraft, side: Side): Lane[] {
+    return side === "ally" ? draft.allies : draft.enemies;
+  }
+
+  /** Registra o evento (fechando o rascunho aberto, se houver). */
+  private log(side: Side | "neutral", kind: EventKind, text: string) {
+    const d = this.draft;
+    this.state.events.push({
+      time: this.state.time,
+      minute: this.state.minute,
+      side,
+      kind,
+      zone: d?.zone ?? null,
+      allies: d ? [...d.allies] : [],
+      enemies: d ? [...d.enemies] : [],
+      victims: d ? [...d.victims] : [],
+      text,
+    });
+    this.draft = null;
   }
 
   private name(side: Side, lane: Lane): string {
@@ -422,20 +586,88 @@ export class Match {
     return champName(champs[best].id);
   }
 
-  private addGold(side: Side, amount: number) {
-    this.state[side].gold += Math.round(amount);
+  private pickWeighted<T>(items: T[], weight: (item: T) => number): T {
+    if (items.length === 1) return items[0];
+    const total = items.reduce((sum, item) => sum + weight(item), 0);
+    let roll = this.rng.next() * total;
+    for (const item of items) {
+      roll -= weight(item);
+      if (roll < 0) return item;
+    }
+    return items[items.length - 1];
   }
 
-  private kill(side: Side, n: number) {
-    this.state[side].kills += n;
-    this.addGold(side, 300 * n);
+  /** Ouro do time, dividido entre quem recebeu (por padrão, os 5). */
+  private addGold(side: Side, amount: number, recipients: Lane[] = LANES) {
+    const value = Math.round(amount);
+    this.state[side].gold += value;
+    for (const l of recipients) this.champ(side, l).gold += value / recipients.length;
   }
 
-  private destroyTowers(side: Side, n: number): number {
-    const st = this.state[side];
-    const taken = Math.min(n, TOWERS_TO_WIN - st.towers);
-    st.towers += taken;
-    this.addGold(side, 600 * taken);
+  /**
+   * `side` abate até `n` campeões inimigos. Com um evento aberto, só morre quem está
+   * nele (os mais frágeis morrem mais; quem tem mais dano mata mais); sem evento,
+   * qualquer inimigo vivo pode morrer.
+   */
+  private kill(side: Side, n: number, opts: KillOptions = {}): { killer: Lane; victim: Lane }[] {
+    const foe = other(side);
+    const d = this.draft;
+    const killers = d && this.participants(d, side).length ? this.participants(d, side) : LANES;
+    const victimPool = d ? this.participants(d, foe) : LANES;
+    const done: { killer: Lane; victim: Lane }[] = [];
+
+    for (let i = 0; i < n; i++) {
+      const aliveIn = (pool: Lane[]) => pool.filter((l) => this.isAlive(foe, l));
+      const options = i === 0 && opts.victim && aliveIn(victimPool).includes(opts.victim)
+        ? [opts.victim]
+        : aliveIn(victimPool);
+      if (!options.length) break;
+
+      const victim = this.pickWeighted(options, (l) => 7 - this.profiles[foe].champs[l].attrs.tank);
+      const killer = opts.killer ?? this.pickWeighted(killers, (l) => {
+        const a = this.profiles[side].champs[l].attrs;
+        return a.burst + a.dps;
+      });
+
+      const v = this.champ(foe, victim);
+      v.alive = false;
+      v.deaths++;
+      v.respawnAt = this.state.time + respawnSeconds(this.state.minute);
+      v.zone = baseZone(foe);
+      this.champ(side, killer).kills++;
+      for (const l of killers) if (l !== killer) this.champ(side, l).assists++;
+      this.state[side].kills++;
+      this.addGold(side, KILL_GOLD, [killer]);
+      d?.victims.push({ side: foe, lane: victim });
+      done.push({ killer, victim });
+    }
+    return done;
+  }
+
+  /** Próxima torre a cair do time `owner` (na rota pedida ou na rota mais avançada). */
+  private nextTower(owner: Side, route?: Route): TowerDef | undefined {
+    const standing = this.state.towersStanding[owner];
+    const laneTowers = TOWERS.filter((t) => t.route !== "base" && standing.includes(t.id));
+    const inRoute = route && laneTowers.find((t) => t.route === route);
+    if (inRoute) return inRoute;
+    if (laneTowers.length) {
+      const remaining = (r: TowerDef["route"]) => laneTowers.filter((t) => t.route === r).length;
+      return [...laneTowers].sort((a, b) => remaining(a.route) - remaining(b.route))[0];
+    }
+    return TOWERS.find((t) => standing.includes(t.id));
+  }
+
+  private destroyTowers(side: Side, n: number, route?: Route): number {
+    const owner = other(side);
+    let taken = 0;
+    for (let i = 0; i < n; i++) {
+      const tower = this.nextTower(owner, route);
+      if (!tower) break;
+      this.state.towersStanding[owner] = this.state.towersStanding[owner].filter((id) => id !== tower.id);
+      taken++;
+    }
+    this.state[side].towers += taken;
+    this.addGold(side, TOWER_GOLD * taken);
     return taken;
   }
 
@@ -443,9 +675,9 @@ export class Match {
   private fight(winner: Side, win: [number, number], lose: [number, number]): [number, number] {
     const w = this.rng.int(...win);
     const l = this.rng.int(...lose);
-    this.kill(winner, w);
-    this.kill(other(winner), l);
-    return [w, l];
+    const wk = this.kill(winner, w).length;
+    const lk = this.kill(other(winner), l).length;
+    return [wk, lk];
   }
 
   private towersText(n: number) {
@@ -459,34 +691,38 @@ export class Match {
     const soulTaken = s.ally.dragons >= 4 || s.enemy.dragons >= 4;
     if (!s.dragonUp && !soulTaken && s.turn >= s.nextDragonTurn) {
       s.dragonUp = true;
-      this.log("neutral", "🐉 Um Dragão apareceu no rio.");
+      this.event("dragon", [], []);
+      this.log("neutral", "dragon-spawn", "🐉 Um Dragão apareceu no rio.");
     }
     if (!s.baronUp && s.turn >= s.nextBaronTurn) {
       s.baronUp = true;
-      this.log("neutral", "👾 O Barão Na'Shor está disponível.");
+      this.event("baron", [], []);
+      this.log("neutral", "baron-spawn", "👾 O Barão Na'Shor está disponível.");
     }
   }
 
   private giveDragon(side: Side) {
     const s = this.state;
+    if (!this.draft) this.event("dragon", side === "ally" ? LANES : [], side === "enemy" ? LANES : []);
     s[side].dragons++;
     this.addGold(side, 200);
     s.dragonUp = false;
     s.nextDragonTurn = s.turn + DRAGON_RESPAWN;
     const n = s[side].dragons;
-    this.log(side, n >= 4
+    this.log(side, "dragon", n >= 4
       ? `🐉 ${TEAM_NAME[side]} conquistou a ALMA DO DRAGÃO!`
       : `🐉 ${TEAM_NAME[side]} garantiu o Dragão (${n}/4).`);
   }
 
   private giveBaron(side: Side) {
     const s = this.state;
+    if (!this.draft) this.event("baron", side === "ally" ? LANES : [], side === "enemy" ? LANES : []);
     s[side].barons++;
     s[side].baronTurns = BARON_DURATION;
     this.addGold(side, 1500);
     s.baronUp = false;
     s.nextBaronTurn = s.turn + BARON_RESPAWN;
-    this.log(side, `👾 ${TEAM_NAME[side]} abateu o Barão Na'Shor!`);
+    this.log(side, "baron", `👾 ${TEAM_NAME[side]} abateu o Barão Na'Shor!`);
   }
 
   private autoDragon() {
@@ -496,9 +732,10 @@ export class Match {
       4,
     );
     const winner: Side = this.rng.chance(chance) ? "ally" : "enemy";
+    this.event("dragon", LANES, LANES);
     if (this.rng.chance(0.4)) {
       const [w, l] = this.fight(winner, [1, 2], [0, 1]);
-      this.log(winner, `Briga no rio pelo Dragão: ${TEAM_NAME[winner].toLowerCase()} levou a melhor (${w}x${l}).`);
+      this.log(winner, "skirmish", `Briga no rio pelo Dragão: ${TEAM_NAME[winner].toLowerCase()} levou a melhor (${w}x${l}).`);
     }
     this.giveDragon(winner);
   }
@@ -516,15 +753,18 @@ export class Match {
       const diff = edge + this.rng.range(-1.5, 1.5);
       const gold = Math.round(diff * 80);
       this.state.laneLead[lane.key] += gold;
-      this.addGold(gold > 0 ? "ally" : "enemy", Math.abs(gold));
+      this.addGold(gold > 0 ? "ally" : "enemy", Math.abs(gold), lane.members);
 
       if (Math.abs(diff) > 1.8 && this.rng.chance(0.4)) {
         const winner: Side = diff > 0 ? "ally" : "enemy";
-        this.kill(winner, 1);
-        this.state.laneLead[lane.key] += winner === "ally" ? 300 : -300;
-        const killer = this.name(winner, lane.members[0]);
-        const victim = this.name(other(winner), this.rng.pick(lane.members));
-        this.log(winner, `⚔️ ${killer} abateu ${victim} ${lane.label}.`);
+        this.event(lane.key, lane.members, lane.members);
+        const [k] = this.kill(winner, 1, { victim: this.rng.pick(lane.members) });
+        if (!k) {
+          this.draft = null;
+          continue;
+        }
+        this.state.laneLead[lane.key] += winner === "ally" ? KILL_GOLD : -KILL_GOLD;
+        this.log(winner, "lane-kill", `⚔️ ${this.name(winner, k.killer)} abateu ${this.name(other(winner), k.victim)} ${lane.label}.`);
       }
     }
 
@@ -539,6 +779,7 @@ export class Match {
     const initiative = clamp(jA.early / (jA.early + jE.early) + this.laneEdges.jungle * 0.06, 0.15, 0.85);
     const actor: Side = this.rng.chance(initiative) ? "ally" : "enemy";
     if (!this.rng.chance(0.65)) return; // o caçador ficou farmando
+    if (!this.isAlive(actor, "jungle")) return; // morto não ganka
 
     const target = this.rng.pick(["top", "mid", "adc"] as const);
     const atkLaner = this.profiles[actor].champs[target].attrs;
@@ -549,20 +790,31 @@ export class Match {
     const atk = jungler.early + jungler.engage * 0.4 + atkLaner.cc * 0.8;
     const def = defLaner.mobility * 0.8 + defLaner.peel * 0.4 + defSupport + 2;
     const ganker = this.name(actor, "jungle");
-    const victim = this.name(other(actor), target);
     const laneKey: BigLane = target === "adc" ? "bot" : target;
 
+    const laners: Lane[] = target === "adc" ? ["adc", "support"] : [target];
+    const attackers: Lane[] = ["jungle", ...laners];
+    this.event(laneKey, actor === "ally" ? attackers : laners, actor === "ally" ? laners : attackers);
+
     if (this.rng.chance(winChance(atk, def, 2))) {
-      this.kill(actor, 1);
-      this.state.laneLead[laneKey] += actor === "ally" ? 300 : -300;
+      const [k] = this.kill(actor, 1, { victim: target, killer: "jungle" });
+      if (!k) {
+        this.draft = null;
+        return;
+      }
+      this.state.laneLead[laneKey] += actor === "ally" ? KILL_GOLD : -KILL_GOLD;
       this.state.jungleScore += actor === "ally" ? 1 : -1;
-      this.log(actor, `🌿 ${ganker} gankou ${GANK_PLACE[target]} e abateu ${victim}.`);
+      this.log(actor, "gank", `🌿 ${ganker} gankou ${GANK_PLACE[target]} e abateu ${this.name(other(actor), k.victim)}.`);
     } else if (this.rng.chance(0.25)) {
-      this.kill(other(actor), 1);
+      const [k] = this.kill(other(actor), 1, { victim: "jungle" });
+      if (!k) {
+        this.draft = null;
+        return;
+      }
       this.state.jungleScore += actor === "ally" ? -1 : 1;
-      this.log(other(actor), `🌿 Gank falhou: ${victim} virou a luta e abateu ${ganker}.`);
+      this.log(other(actor), "gank-fail", `🌿 Gank falhou: ${this.name(other(actor), k.killer)} virou a luta e abateu ${ganker}.`);
     } else {
-      this.log("neutral", `🌿 ${victim} escapou do gank de ${ganker}.`);
+      this.log("neutral", "gank-escape", `🌿 ${this.name(other(actor), target)} escapou do gank de ${ganker}.`);
     }
   }
 
@@ -587,12 +839,13 @@ export class Match {
       const lead = s.laneLead[key];
       if (Math.abs(lead) < 900) continue;
       const side: Side = lead > 0 ? "ally" : "enemy";
-      this.destroyTowers(side, 1);
       const [lane, label] = labels[key];
-      this.log(side, `🏰 ${this.name(side, lane)} derrubou a primeira torre ${label}.`);
+      this.event(key, side === "ally" ? [lane] : [], side === "enemy" ? [lane] : []);
+      this.destroyTowers(side, 1, key);
+      this.log(side, "tower", `🏰 ${this.name(side, lane)} derrubou a primeira torre ${label}.`);
     }
     const won = Object.values(s.laneResults).filter((r) => r === "win").length;
-    this.log("neutral", `Fim da fase de rotas — você venceu ${won} de 5 rotas.`);
+    this.log("neutral", "phase", `Fim da fase de rotas — você venceu ${won} de 5 rotas.`);
   }
 
   // ------------------------------------------------------- Meio / fim de jogo
@@ -617,25 +870,38 @@ export class Match {
     const roll = this.rng.next();
     if (roll < 0.35) {
       const winner: Side = this.rng.chance(winChance(pa, pe, 3)) ? "ally" : "enemy";
+      // Escaramuça de 3x3 num dos lados do rio.
+      const zone: Zone = s.turn % 2 === 0 ? "river-top" : "river-bot";
+      this.event(zone, this.rng.shuffle(LANES).slice(0, 3), this.rng.shuffle(LANES).slice(0, 3));
       const [w, l] = this.fight(winner, [1, 3], [0, 1]);
       const t = w - l >= 2 ? this.destroyTowers(winner, 1) : 0;
-      this.log(winner, `⚔️ Escaramuça na selva: ${TEAM_NAME[winner].toLowerCase()} venceu (${w}x${l})${t ? " e aproveitou para derrubar uma torre" : ""}.`);
+      this.log(winner, "skirmish", `⚔️ Escaramuça na selva: ${TEAM_NAME[winner].toLowerCase()} venceu (${w}x${l})${t ? " e aproveitou para derrubar uma torre" : ""}.`);
     } else if (roll < 0.55) {
       const A = this.profiles.ally.sum;
       const E = this.profiles.enemy.sum;
       const winner: Side = this.rng.chance(winChance(A.cc + A.burst, E.cc + E.burst, 2)) ? "ally" : "enemy";
-      this.kill(winner, 1);
-      const lane = this.rng.pick(LANES);
-      this.log(winner, `🎯 ${this.name(winner, "jungle")} pegou ${this.name(other(winner), lane)} desprevenido.`);
+      const target = this.rng.pick(LANES);
+      const victim = this.champ(other(winner), target);
+      this.event(victim.alive ? victim.zone : null, winner === "ally" ? ["jungle"] : [target], winner === "enemy" ? ["jungle"] : [target]);
+      const killer = this.isAlive(winner, "jungle") ? "jungle" : undefined;
+      const [k] = this.kill(winner, 1, { victim: target, killer });
+      if (!k) {
+        this.draft = null;
+        return;
+      }
+      this.log(winner, "pick", `🎯 ${this.name(winner, k.killer)} pegou ${this.name(other(winner), k.victim)} desprevenido.`);
     } else {
       const A = this.profiles.ally.sum;
       const E = this.profiles.enemy.sum;
       const chance = winChance(pa * (1 + A.split * 0.01 + A.poke * 0.01), pe * (1 + E.split * 0.01 + E.poke * 0.01), 3);
       const winner: Side = this.rng.chance(chance) ? "ally" : "enemy";
+      const target = this.nextTower(other(winner));
+      this.event(target ? (target.route === "base" ? baseZone(other(winner)) : target.route) : null, [], []);
       // Vantagem clara de poder vira bola de neve: duas torres de uma vez.
       const dominant = (winner === "ally" ? pa / pe : pe / pa) > 1.15;
       const t = this.destroyTowers(winner, dominant ? 2 : 1);
-      if (t) this.log(winner, `🏰 ${TEAM_NAME[winner]} pressionou as rotas e derrubou ${this.towersText(t)}.`);
+      if (t) this.log(winner, "tower", `🏰 ${TEAM_NAME[winner]} pressionou as rotas e derrubou ${this.towersText(t)}.`);
+      else this.draft = null;
     }
   }
 
@@ -646,16 +912,17 @@ export class Match {
     for (const side of ["ally", "enemy"] as Side[]) {
       if (s[side].baronTurns > 0) {
         s[side].baronTurns--;
-        if (this.destroyTowers(side, 1)) this.log(side, `👾 Com o buff do Barão, ${TEAM_NAME[side].toLowerCase()} derruba mais uma torre.`);
+        if (this.destroyTowers(side, 1)) this.log(side, "tower", `👾 Com o buff do Barão, ${TEAM_NAME[side].toLowerCase()} derruba mais uma torre.`);
       }
     }
 
     this.checkWinner();
     if (!s.winner && s.turn >= MAX_TURNS) {
       const winner: Side = this.rng.chance(winChance(this.teamPower("ally"), this.teamPower("enemy"), 4)) ? "ally" : "enemy";
-      this.log(winner, `⚔️ Luta final pelo Nexus! ${this.star(winner)} decide a partida.`);
+      this.event("mid", LANES, LANES);
+      this.log(winner, "teamfight", `⚔️ Luta final pelo Nexus! ${this.star(winner)} decide a partida.`);
       s.winner = winner;
-      this.log(winner, winner === "ally" ? "🏆 VITÓRIA!" : "💀 DERROTA.");
+      this.log(winner, "end", winner === "ally" ? "🏆 VITÓRIA!" : "💀 DERROTA.");
     }
   }
 
@@ -664,7 +931,7 @@ export class Match {
     for (const side of ["ally", "enemy"] as Side[]) {
       if (!s.winner && s[side].towers >= TOWERS_TO_WIN) {
         s.winner = side;
-        this.log(side, side === "ally" ? "🏆 O Nexus inimigo caiu. VITÓRIA!" : "💀 Seu Nexus foi destruído. DERROTA.");
+        this.log(side, "end", side === "ally" ? "🏆 O Nexus inimigo caiu. VITÓRIA!" : "💀 Seu Nexus foi destruído. DERROTA.");
       }
     }
   }
@@ -692,7 +959,7 @@ export class Match {
       s.dragonUp ? "O Dragão está no rio." : "",
     ].filter(Boolean).join(" ");
 
-    this.log("neutral", `⏸️ Momento decisivo aos ${s.minute} min. ${context}`);
+    this.log("neutral", "decision", `⏸️ Momento decisivo aos ${s.minute} min. ${context}`);
     return { turn: s.turn, minute: s.minute, title: `Momento decisivo — ${s.minute} min`, options };
   }
 
@@ -704,35 +971,38 @@ export class Match {
     switch (id) {
       case "teamfight": {
         const winner = success ? us : them;
+        this.event("mid", LANES, LANES);
         const [w, l] = this.fight(winner, [3, 5], [0, 2]);
         const t = this.destroyTowers(winner, 2);
-        this.log(winner, success
+        this.log(winner, "action", success
           ? `✅ Teamfight vencida! ${this.star(us)} brilhou (${w}x${l}) e o time derrubou ${this.towersText(t)}. ${pct}`
           : `❌ O inimigo venceu a teamfight (${w}x${l}) e derrubou ${this.towersText(t)}. ${pct}`);
         break;
       }
       case "dragon": {
         const winner = success ? us : them;
+        this.event("dragon", LANES, LANES);
         const [w, l] = this.fight(winner, [1, 2], [0, 1]);
-        this.log(winner, success
+        this.log(winner, "action", success
           ? `✅ Seu time controlou o rio (${w}x${l}). ${pct}`
           : `❌ O inimigo chegou primeiro ao rio (${w}x${l}). ${pct}`);
         this.giveDragon(winner);
         break;
       }
       case "baron": {
+        this.event("baron", LANES, LANES);
         if (success) {
           const [w, l] = this.fight(us, [1, 2], [0, 1]);
-          this.log(us, `✅ Barão feito com segurança (${w}x${l}). ${pct}`);
+          this.log(us, "action", `✅ Barão feito com segurança (${w}x${l}). ${pct}`);
           this.giveBaron(us);
         } else if (this.rng.chance(0.5)) {
-          this.log(them, `❌ ROUBADO! ${this.name(them, "jungle")} roubou o Barão. ${pct}`);
           this.fight(them, [2, 4], [0, 1]);
+          this.log(them, "action", `❌ ROUBADO! ${this.name(them, "jungle")} roubou o Barão. ${pct}`);
           this.giveBaron(them);
         } else {
           const [w, l] = this.fight(them, [3, 5], [0, 2]);
           this.destroyTowers(them, 1);
-          this.log(them, `❌ O inimigo pegou seu time no Barão (${w}x${l}) e avançou. ${pct}`);
+          this.log(them, "action", `❌ O inimigo pegou seu time no Barão (${w}x${l}) e avançou. ${pct}`);
         }
         break;
       }
@@ -740,54 +1010,62 @@ export class Match {
         const E = this.profiles.enemy.champs;
         const target = (["top", "mid", "adc"] as Lane[]).reduce((a, b) =>
           E[b].attrs.tank + E[b].attrs.peel < E[a].attrs.tank + E[a].attrs.peel ? b : a);
+        const route = LANE_ROUTE[target]!;
+        const defenders: Lane[] = target === "adc" ? ["adc", "support", "jungle"] : [target, "jungle"];
+        this.event(route, ["jungle", target, target === "mid" ? "support" : "mid"], defenders);
         if (success) {
           const [w] = this.fight(us, [2, 3], [0, 1]);
-          this.destroyTowers(us, 1);
-          this.log(us, `✅ Dive perfeito na rota ${LANE_LABEL[target].toLowerCase()}: ${this.name(them, target)} caiu, ${w} abates e uma torre. ${pct}`);
+          this.destroyTowers(us, 1, route);
+          this.log(us, "action", `✅ Dive perfeito na rota ${LANE_LABEL[target].toLowerCase()}: ${this.name(them, target)} caiu, ${w} abates e uma torre. ${pct}`);
         } else {
           const [w, l] = this.fight(them, [2, 4], [0, 1]);
-          this.log(them, `❌ O dive deu errado: o inimigo segurou e puniu (${w}x${l}). ${pct}`);
+          this.log(them, "action", `❌ O dive deu errado: o inimigo segurou e puniu (${w}x${l}). ${pct}`);
         }
         break;
       }
       case "siege": {
+        this.event("mid", LANES, LANES);
         if (success) {
-          const t = this.destroyTowers(us, 2);
-          this.log(us, `✅ Cerco bem-sucedido: o poke afastou o inimigo e caíram ${this.towersText(t)}. ${pct}`);
+          const t = this.destroyTowers(us, 2, "mid");
+          this.log(us, "action", `✅ Cerco bem-sucedido: o poke afastou o inimigo e caíram ${this.towersText(t)}. ${pct}`);
         } else {
           const [w, l] = this.fight(them, [2, 3], [0, 1]);
-          this.log(them, `❌ O inimigo engajou no meio do cerco (${w}x${l}). ${pct}`);
+          this.log(them, "action", `❌ O inimigo engajou no meio do cerco (${w}x${l}). ${pct}`);
         }
         break;
       }
       case "split": {
         const top = this.name(us, "top");
         if (success) {
-          const t = this.destroyTowers(us, this.rng.chance(0.5) ? 2 : 1);
-          this.log(us, `✅ ${top} dominou a rota lateral e derrubou ${this.towersText(t)}. ${pct}`);
+          this.event("top", ["top"], ["top"]);
+          const t = this.destroyTowers(us, this.rng.chance(0.5) ? 2 : 1, "top");
+          this.log(us, "action", `✅ ${top} dominou a rota lateral e derrubou ${this.towersText(t)}. ${pct}`);
         } else {
-          this.kill(them, 1);
+          this.event("top", ["top"], ["top", "jungle"]);
+          this.kill(them, 1, { victim: "top" });
           this.destroyTowers(them, 1);
-          this.log(them, `❌ ${top} foi pego sozinho, e o inimigo usou a vantagem para pegar uma torre. ${pct}`);
+          this.log(them, "action", `❌ ${top} foi pego sozinho, e o inimigo usou a vantagem para pegar uma torre. ${pct}`);
         }
         break;
       }
       case "farm": {
         if (success) {
           this.addGold(us, 900);
-          this.log(us, `✅ Seu time farmou com segurança e escalou (+900 de ouro). ${pct}`);
+          this.log(us, "action", `✅ Seu time farmou com segurança e escalou (+900 de ouro). ${pct}`);
         } else {
           this.destroyTowers(them, 1);
-          this.log(them, `❌ Enquanto vocês farmavam, o inimigo pegou uma torre de graça. ${pct}`);
+          this.log(them, "action", `❌ Enquanto vocês farmavam, o inimigo pegou uma torre de graça. ${pct}`);
         }
         break;
       }
       case "invade": {
         const winner = success ? us : them;
+        const invaders: Lane[] = ["jungle", "mid", "support"];
+        this.event(jungleZone("enemy", "top"), invaders, invaders);
         const [w, l] = this.fight(winner, [1, 2], [0, 1]);
-        this.addGold(winner, 500);
+        this.addGold(winner, 500, ["jungle"]);
         this.state.jungleScore += success ? 1 : -1;
-        this.log(winner, success
+        this.log(winner, "action", success
           ? `✅ Invasão certeira: ${this.name(us, "jungle")} roubou os campos (${w}x${l}). ${pct}`
           : `❌ A invasão foi pega no flanco (${w}x${l}). ${pct}`);
         break;

@@ -1,6 +1,6 @@
 import { getChampion } from "../../shared/champions";
 import {
-  buildShareText, summarizeTeam, TOWERS_TO_WIN,
+  buildShareText, formatClock, summarizeTeam, TOWERS_TO_WIN,
   type DecisionPrompt, type Match, type MatchEvent, type MatchSummary,
 } from "../../shared/engine";
 import { getMatchup, laneEdge } from "../../shared/matchups";
@@ -164,13 +164,13 @@ export function matchView(match: Match, onFinish: () => void): HTMLElement {
     h("div", { class: `team-row ${cls}` }, LANES.map((l) => champIcon(team[l], "sm")));
 
   const renderScore = () => {
-    const { ally, enemy, minute } = match.state;
+    const { ally, enemy } = match.state;
     const gold = ally.gold - enemy.gold;
     score.replaceChildren(
       h("div", { class: "score-side" }, h("span", { class: "label" }, "Seu time"), teamsRow(match.allyTeam, "ally"),
         h("span", { class: "kills ally" }, ally.kills)),
       h("div", { class: "score-mid" },
-        h("div", { class: "clock" }, `${minute} min`),
+        h("div", { class: "clock" }, formatClock(match.state.time)),
         h("div", { class: `gold ${gold >= 0 ? "ally" : "enemy"}` }, `${gold >= 0 ? "+" : ""}${(gold / 1000).toFixed(1)}k ouro`),
         h("div", { class: "stat" }, `🏰 ${ally.towers}/${TOWERS_TO_WIN} · ${enemy.towers}/${TOWERS_TO_WIN}`),
         h("div", { class: "stat" }, `🐉 ${ally.dragons} · ${enemy.dragons}  👾 ${ally.barons} · ${enemy.barons}`),
@@ -224,7 +224,8 @@ export function matchView(match: Match, onFinish: () => void): HTMLElement {
       speedBtn.classList.add("hidden");
       return;
     }
-    timer = window.setTimeout(tick, fast ? 250 : 1100);
+    // Cada advance() são 30 s de jogo: ~2 min de jogo a cada 1,1 s no modo normal.
+    timer = window.setTimeout(tick, fast ? 60 : 275);
   };
 
   renderScore();
